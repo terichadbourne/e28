@@ -1,0 +1,22 @@
+#word, #fail {
+  letter-spacing: 1em;
+  font-weight: bold;
+  padding-top: 30px;
+  font: 28px;
+}
+
+#word.win {
+  color: green;
+}
+
+.fail {
+  color: red;
+}
+
+button.guess {
+  background-color: blue;
+  color: white;
+}
+button.guess:disabled {
+  background-color: gray;
+}
