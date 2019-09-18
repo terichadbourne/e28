@@ -11,13 +11,13 @@ guessButtons.forEach(function (guessButton) {
   guessButton.disabled = true
 })
 
-var solutions = ["toilet", "potty", "bathroom", "disgusting", "flush", "nasty", "restroom", "terrible", "wrong", "smell", "gross", "consequences", "disappointed", "spilled", "trouble"]
-var strikes = 0
-var solution = null
-var solutionLetters = null
-var currentLetters = null
-var guessedLetters = null
-var failedLetters = null
+const solutions = ["toilet", "potty", "bathroom", "disgusting", "flush", "nasty", "restroom", "terrible", "wrong", "smell", "gross", "consequences", "disappointed", "spilled", "trouble"]
+let strikes = 0
+let solution = null
+let solutionLetters = null
+let currentLetters = null
+let guessedLetters = null
+let failedLetters = null
 
 function start() {
   guessButtons.forEach(function (guessButton) {
