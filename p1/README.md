@@ -15,6 +15,8 @@
 
 
 ## Notes for instructor
-I hadn't thought to prevent my computer from picking the same word twice in a row before watching your video, but I didn't directly reference your code while adding this feature. Great idea!
-
 The theme of this game will make a lot more sense if you soak in my [Toilet Transcripts](http://toilettranscripts.com) website first.
+
+I hadn't thought to prevent my computer from picking the same word twice in a row before watching your video, but I didn't directly reference your code while adding this feature. Thanks for the idea!
+
+I closed out [my issue](https://github.com/susanBuck/e28-fall19/issues/69) after getting some helpful suggestions from classmates that increased the efficiency of my code but didn't answer my underlying question. I'm still curious whether there's a simpler way to reference a bunch of elements in Vue without components and without being a context where `event.target` is available. ¯_(ツ)_/¯

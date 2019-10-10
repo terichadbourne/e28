@@ -30,7 +30,7 @@ var app = new Vue({
           if ((this.correctGuesses.length > 0) && this.correctGuesses.includes(this.solution.charAt(i))) {
             lettersArray.push(this.solution.charAt(i))
           } else {
-            lettersArray.push('_')
+            lettersArray.push('?')
             noWinYet = true
           }
         }
