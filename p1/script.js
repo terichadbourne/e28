@@ -4,12 +4,15 @@ var app = new Vue({
     data: {
       solutions: ["toilet", "potty", "bathroom", "disgusting", "flush", "nasty", "restroom", "terrible", "wrong", "smell", "gross", "consequences", "disappointed", "spilled", "trouble"],
       alphabet: ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"],
-      strikes: 0,
       solution: null,
       correctGuesses: [],
+      incorrectGuesses: [],
       gameStatus: "pregame"
     },
     computed: {
+      strikes: function () {
+        return this.incorrectGuesses.length
+      },
       liveGame: function () {
         return this.gameStatus === "playing"
       },
@@ -36,26 +39,18 @@ var app = new Vue({
           while (this.solution === oldSolution) {
             this.solution = this.solutions[Math.floor(Math.random() * this.solutions.length)]
           }
-          this.strikes = 0
+          this.incorrectGuesses = []
           this.correctGuesses = []
-          let guessButtons = document.getElementsByClassName('guess')
-          Array.prototype.forEach.call(guessButtons, function(button) {
-              button.disabled = false
-              button.classList.remove('correct', 'incorrect')
-          })
           this.gameStatus = "playing"
         },
         isCorrect: function (guessedLetter) {
           return this.solution.includes(guessedLetter)
         },
         guess: function (guessedLetter) {
-          event.target.disabled = true
           if (this.isCorrect(guessedLetter)) {
-            event.target.classList.add('correct')
             this.correctGuesses.push(guessedLetter)
           } else {
-            event.target.classList.add('incorrect')
-            this.strikes ++
+            this.incorrectGuesses.push(guessedLetter)
             if (this.strikes >= 6) {
               this.gameStatus = "lost"
             }

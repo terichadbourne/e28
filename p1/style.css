@@ -3,10 +3,17 @@
   font-weight: bold;
   padding-top: 30px;
   font-size: 28px;
+  height: 50px;
+}
+
+#start {
+  background-color: black;
+  color: white;
+  font-size: 24px;
 }
 
 .feedback {
-  font-size: 16px;
+  font-size: 24px;
   font-weight: bold;
 }
 
@@ -19,9 +26,18 @@
   color: green;
 }
 
-#word.won {
-  background-color: green;
-  color: white;
+button {
+  -webkit-box-shadow: 0 5px 10px #666;
+  -moz-box-shadow: 0 5px 10px #666;
+  box-shadow: 0 5px 10px #666;
+  border-radius: 5px;
+  border-width: 0;
+}
+
+button:disabled {
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
 }
 
 button.guess {
@@ -37,7 +53,6 @@ button.guess {
 button.guess:disabled {
   opacity: 0.4;
   cursor: not-allowed;
-  color: black;
 }
 
 button.guess.correct:disabled {

@@ -20,34 +20,39 @@
       A game to accompany the <a href="http://toilettranscripts.com">Toilet Transcripts</a>
     </p>
 
-    <p v-if="gameStatus === 'won'" class="won feedback">🏆 You won! Congratulations! 🏆</p>
-    <p v-if="gameStatus === 'lost'" class="lost feedback">🤦 Oops. That didn't go so well. Want to play again? 🤦</p>
-
-    <button id="start" v-on:click='startGame'>
-      Start New Game
-    </button>
-
-    <p>Solution: {{solution}}</p>
-
-    <div id="word" v-if="solution && (gameStatus !== 'lost')" :class="{won: gameStatus === 'won'}">{{currentLetters.join('')}}</div>
-
-    <div id="word" v-if="solution && (gameStatus === 'lost')">
-      <span class="letter" v-for="letter in solution.split('')" :class="{lost: !correctGuesses.includes(letter)}">{{letter}}</span>
+    <div id="word">
+        <span v-if="solution && (gameStatus !== 'lost')" :class="{won: gameStatus === 'won'}">{{currentLetters.join('')}}</span>
+        <span v-if="solution && (gameStatus === 'lost')">
+          <span class="letter" v-for="letter in solution.split('')" :class="{lost: !correctGuesses.includes(letter)}">{{letter}}</span>
+        </span>
     </div>
 
-    <div :class="{ warn: strikes > 4 }">
-      <h2>
-        Strikes: {{strikes}}
-      </h2>
-      <p>{{6 - strikes}} strikes remaining</p>
+    <div v-if="gameStatus !== 'pregame'" :class="{ warn: strikes > 4 }">
+      <h2>Strikes: {{strikes}}</h2>
+      <h3>(<em>{{6 - strikes}} strikes remaining</em>)</h3>
     </div>
 
-    <div v-show="liveGame">
-      <button v-for="letter in alphabet" class="guess" @click="guess(letter), $event">
-        {{letter}}
+    <div class="feedback">
+      <p v-if="gameStatus === 'won'" class="won">🏆 You won! Congratulations! 🏆</p>
+      <p v-if="gameStatus === 'lost'" class="lost">🤦 Oops. That didn't go so well. Want to play again? 🤦</p>
+      <p v-if="gameStatus === 'pregame'">Ready to get started?</p>
+      <button id="start" v-if="!liveGame"  v-on:click='startGame'>
+        Start New Game
       </button>
     </div>
 
+
+
+    <div v-show="liveGame">
+      <button
+      v-for="letter in alphabet"
+      @click="guess(letter), $event"
+      :disabled="!liveGame || (correctGuesses.includes(letter) || incorrectGuesses.includes(letter))"
+      class="guess"
+      :class="[{incorrect: incorrectGuesses.includes(letter)}, {correct: correctGuesses.includes(letter)}]">
+        {{letter}}
+      </button>
+    </div>
 
   </div>
 
