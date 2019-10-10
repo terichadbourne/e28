@@ -36,12 +36,22 @@
       <p v-if="gameStatus === 'won'" class="won">🏆 You won! Congratulations! 🏆</p>
       <p v-if="gameStatus === 'lost'" class="lost">🤦 Oops. That didn't go so well. Want to play again? 🤦</p>
       <p v-if="gameStatus === 'pregame'">Ready to get started?</p>
+    </div>
+    <div v-if="!liveGame">
+      <p>Select a level:</p>
+      <input type='radio' id='easy' value='easy' v-model='level'>
+      <label for='easy'>Easy</label>
+
+      <input type='radio' id='hard' value='hard' v-model='level'>
+      <label for='hard'>Hard</label>
+
+      <input type='radio' id='surprise' value='surprise' v-model='level'>
+      <label for='surprise'>Surprise Me</label>
       <button id="start" v-if="!liveGame"  v-on:click='startGame'>
         Start New Game
       </button>
     </div>
-
-
+    <p v-else>Level: {{solution.length < 6 ? 'Easy' : 'Hard'}}</p>
 
     <div v-show="liveGame">
       <button

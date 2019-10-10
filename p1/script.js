@@ -4,12 +4,19 @@ var app = new Vue({
     data: {
       solutions: ["toilet", "potty", "bathroom", "disgusting", "flush", "nasty", "restroom", "terrible", "wrong", "smell", "gross", "consequences", "disappointed", "spilled", "trouble"],
       alphabet: ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"],
-      solution: null,
+      solution: '',
       correctGuesses: [],
       incorrectGuesses: [],
-      gameStatus: "pregame"
+      gameStatus: "pregame",
+      level: 'surprise'
     },
     computed: {
+      easySolutions: function () {
+        return this.solutions.filter(word => word.length < 6)
+      },
+      hardSolutions: function () {
+        return this.solutions.filter(word => word.length > 5)
+      },
       strikes: function () {
         return this.incorrectGuesses.length
       },
@@ -36,8 +43,16 @@ var app = new Vue({
     methods: {
         startGame: function () {
           let oldSolution = this.solution
+          let words = []
+          if (this.level === "hard") {
+            words = this.hardSolutions
+          } else if (this.level === "easy") {
+            words = this.easySolutions
+          } else {
+            words = this.solutions
+          }
           while (this.solution === oldSolution) {
-            this.solution = this.solutions[Math.floor(Math.random() * this.solutions.length)]
+            this.solution = words[Math.floor(Math.random() * words.length)]
           }
           this.incorrectGuesses = []
           this.correctGuesses = []
