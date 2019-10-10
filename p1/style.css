@@ -1,3 +1,7 @@
+body {
+  font-size: 16px;
+}
+
 button {
   -webkit-box-shadow: 0 5px 10px #666;
   -moz-box-shadow: 0 5px 10px #666;
@@ -21,7 +25,6 @@ button.guess,
   height: 30px;
   width: 30px;
   margin: 5px;
-  font-size: 16px;
   font-weight: bold;
   text-align: center;
 }
@@ -32,13 +35,17 @@ button.guess:disabled {
 }
 
 button.guess.correct:disabled,
-.letter.correct.won {
+.letter.correct {
   background-color: green;
 }
 
 button.guess.incorrect:disabled,
 .letter.missed.lost {
   background-color: red;
+}
+
+.letter.correct.lost {
+  background-color: black;
 }
 
 p.lost,
@@ -51,7 +58,7 @@ p.won {
 }
 
 .feedback {
-  font-size: 24px;
+  font-size: 1.2em;
   font-weight: bold;
 }
 
@@ -64,7 +71,8 @@ p.won {
 #start {
   background-color: black;
   color: white;
-  font-size: 24px;
   margin-top: 10px;
   display: block;
+  font-weight: bold;
+  font-size: 1.2em;
 }

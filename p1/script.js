@@ -41,35 +41,35 @@ var app = new Vue({
       }
     },
     methods: {
-        startGame: function () {
-          let oldSolution = this.solution
-          let words = []
-          if (this.level === "hard") {
-            words = this.hardSolutions
-          } else if (this.level === "easy") {
-            words = this.easySolutions
-          } else {
-            words = this.solutions
-          }
-          while (this.solution === oldSolution) {
-            this.solution = words[Math.floor(Math.random() * words.length)]
-          }
-          this.incorrectGuesses = []
-          this.correctGuesses = []
-          this.gameStatus = "playing"
-        },
-        isCorrect: function (guessedLetter) {
-          return this.solution.includes(guessedLetter)
-        },
-        guess: function (guessedLetter) {
-          if (this.isCorrect(guessedLetter)) {
-            this.correctGuesses.push(guessedLetter)
-          } else {
-            this.incorrectGuesses.push(guessedLetter)
-            if (this.strikes >= 6) {
-              this.gameStatus = "lost"
-            }
+      startGame: function () {
+        let oldSolution = this.solution
+        let words = []
+        if (this.level === "hard") {
+          words = this.hardSolutions
+        } else if (this.level === "easy") {
+          words = this.easySolutions
+        } else {
+          words = this.solutions
+        }
+        while (this.solution === oldSolution) {
+          this.solution = words[Math.floor(Math.random() * words.length)]
+        }
+        this.incorrectGuesses = []
+        this.correctGuesses = []
+        this.gameStatus = "playing"
+      },
+      isCorrect: function (guessedLetter) {
+        return this.solution.includes(guessedLetter)
+      },
+      guess: function (guessedLetter) {
+        if (this.isCorrect(guessedLetter)) {
+          this.correctGuesses.push(guessedLetter)
+        } else {
+          this.incorrectGuesses.push(guessedLetter)
+          if (this.strikes >= 6) {
+            this.gameStatus = "lost"
           }
         }
+      }
     }
 })
