@@ -1,72 +1,74 @@
 <!doctype html>
 <html lang='en'>
 
-<head>
-  <title>Potty Talk</title>
-  <meta charset='utf-8'>
-  <link rel="stylesheet" href="style.css">
-  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js" defer></script>
-  <script src='script.js' defer></script>
-</head>
+  <head>
+    <title>Potty Talk</title>
+    <meta charset='utf-8'>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js" defer></script>
+    <script src='script.js' defer></script>
+  </head>
 
-<body>
+  <body>
 
-  <div id="app">
+    <div id="app">
 
-    <h1>
-      Potty Talk
-    </h1>
-    <p>
-      A game to accompany the <a href="http://toilettranscripts.com">Toilet Transcripts</a>
-    </p>
+      <h1>
+        Potty Talk
+      </h1>
+      <p>
+        A game to accompany the <a href="http://toilettranscripts.com">Toilet Transcripts</a>
+      </p>
 
-    <div id="word">
-        <span v-if="solution && (gameStatus !== 'lost')" :class="{won: gameStatus === 'won'}">{{currentLetters.join('')}}</span>
-        <span v-if="solution && (gameStatus === 'lost')">
-          <span class="letter" v-for="letter in solution.split('')" :class="{lost: !correctGuesses.includes(letter)}">{{letter}}</span>
-        </span>
+      <div id="word">
+          <span v-if="solution && (gameStatus !== 'lost')" :class="{won: gameStatus === 'won'}">{{currentLetters.join('')}}</span>
+          <span v-if="solution && (gameStatus === 'lost')">
+            <span class="letter" v-for="letter in solution.split('')" :class="{lost: !correctGuesses.includes(letter)}">{{letter}}</span>
+          </span>
+      </div>
+
+      <div v-if="gameStatus !== 'pregame'" :class="{ warn: strikes >= 4 }">
+        <h2>Strikes: {{strikes}}</h2>
+        <h3>(<em>{{6 - strikes}} strikes remaining</em>)</h3>
+        <p v-if="liveGame && (strikes >= 4)">Uh oh! You're almost out of guesses. Go check out the <a href="http://toilettranscripts.com/glossary.html" target=”_blank”>Toilet Transcripts glossary</a> if you're feeling particularly stumped.</p>
+      </div>
+
+      <div class="feedback">
+        <p v-if="gameStatus === 'won'" class="won">🏆 You won! Congratulations! 🏆</p>
+        <p v-if="gameStatus === 'lost'" class="lost">🤦 Oops. That didn't go so well. Want to play again? 🤦</p>
+        <p v-if="gameStatus === 'pregame'">Ready to get started?</p>
+      </div>
+
+      <div v-if="!liveGame">
+        <p>Select a level:</p>
+        <input type='radio' id='easy' value='easy' v-model='level'>
+        <label for='easy'>Easy</label>
+
+        <input type='radio' id='hard' value='hard' v-model='level'>
+        <label for='hard'>Hard</label>
+
+        <input type='radio' id='surprise' value='surprise' v-model='level'>
+        <label for='surprise'>Surprise Me</label>
+        <button id="start" v-if="!liveGame"  v-on:click='startGame'>
+          Start New Game
+        </button>
+      </div>
+
+      <div v-else>
+        <p>Level: {{solution.length < 6 ? 'Easy' : 'Hard'}}</p>
+        <button
+          v-for="letter in alphabet"
+          @click="guess(letter), $event"
+          :disabled="!liveGame || (correctGuesses.includes(letter) || incorrectGuesses.includes(letter))"
+          class="guess"
+          :class="[{incorrect: incorrectGuesses.includes(letter)}, {correct: correctGuesses.includes(letter)}]">
+          {{letter}}
+        </button>
+        <p>Guess a letter by clicking a button above. Make 6 incorrect solutions and you'll lose, so keep an eye on your strike tally above. Remember, all words are toilet-themed.</p>
+      </div>
+
     </div>
 
-    <div v-if="gameStatus !== 'pregame'" :class="{ warn: strikes > 4 }">
-      <h2>Strikes: {{strikes}}</h2>
-      <h3>(<em>{{6 - strikes}} strikes remaining</em>)</h3>
-    </div>
-
-    <div class="feedback">
-      <p v-if="gameStatus === 'won'" class="won">🏆 You won! Congratulations! 🏆</p>
-      <p v-if="gameStatus === 'lost'" class="lost">🤦 Oops. That didn't go so well. Want to play again? 🤦</p>
-      <p v-if="gameStatus === 'pregame'">Ready to get started?</p>
-    </div>
-    <div v-if="!liveGame">
-      <p>Select a level:</p>
-      <input type='radio' id='easy' value='easy' v-model='level'>
-      <label for='easy'>Easy</label>
-
-      <input type='radio' id='hard' value='hard' v-model='level'>
-      <label for='hard'>Hard</label>
-
-      <input type='radio' id='surprise' value='surprise' v-model='level'>
-      <label for='surprise'>Surprise Me</label>
-      <button id="start" v-if="!liveGame"  v-on:click='startGame'>
-        Start New Game
-      </button>
-    </div>
-    <p v-else>Level: {{solution.length < 6 ? 'Easy' : 'Hard'}}</p>
-
-    <div v-show="liveGame">
-      <button
-      v-for="letter in alphabet"
-      @click="guess(letter), $event"
-      :disabled="!liveGame || (correctGuesses.includes(letter) || incorrectGuesses.includes(letter))"
-      class="guess"
-      :class="[{incorrect: incorrectGuesses.includes(letter)}, {correct: correctGuesses.includes(letter)}]">
-        {{letter}}
-      </button>
-    </div>
-
-  </div>
-
-
-</body>
+  </body>
 
 </html>
