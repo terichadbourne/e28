@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang='en'>
+
+<head>
+  <title>Potty Talk</title>
+  <meta charset='utf-8'>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js" defer></script>
+  <script src='script.js' defer></script>
+</head>
+
+<body>
+
+  <div id="app">
+
+    <h1>
+      Potty Talk
+    </h1>
+    <p>
+      A game to accompany the <a href="http://toilettranscripts.com">Toilet Transcripts</a>
+    </p>
+
+    <p v-if="gameStatus === 'won'" class="won feedback">🏆 You won! Congratulations! 🏆</p>
+    <p v-if="gameStatus === 'lost'" class="lost feedback">🤦 Oops. That didn't go so well. Want to play again? 🤦</p>
+
+    <button id="start" v-on:click='startGame'>
+      Start New Game
+    </button>
+
+    <p>Solution: {{solution}}</p>
+
+    <div id="word" v-if="solution && (gameStatus !== 'lost')" :class="{won: gameStatus === 'won'}">{{currentLetters.join('')}}</div>
+
+    <div id="word" v-if="solution && (gameStatus === 'lost')">
+      <span class="letter" v-for="letter in solution.split('')" :class="{lost: !correctGuesses.includes(letter)}">{{letter}}</span>
+    </div>
+
+    <div :class="{ warn: strikes > 4 }">
+      <h2>
+        Strikes: {{strikes}}
+      </h2>
+      <p>{{6 - strikes}} strikes remaining</p>
+    </div>
+
+    <div v-show="liveGame">
+      <button v-for="letter in alphabet" class="guess" @click="guess(letter), $event">
+        {{letter}}
+      </button>
+    </div>
+
+
+  </div>
+
+
+</body>
+
+</html>
