@@ -1,53 +1,53 @@
 <template>
-  <div
-    class="letter"
-    :class="[guessStatus]">
-    <span :class=[blurStatus]>{{ displayValue }}</span>
+  <div class="letter" :class="[guessStatus]">
+    <span :class="[blurStatus]">{{ displayValue }}</span>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'SolutionTile',
+  name: "SolutionTile",
   props: {
     letter: String,
     gameStatus: String,
     correctGuesses: Array
   },
   computed: {
-    guessed: function () {
-      return this.correctGuesses.includes(this.letter)
+    guessed: function() {
+      return this.correctGuesses.includes(this.letter);
     },
-    displayValue: function () {
-      return (this.guessed || this.gameStatus === 'lost') ? this.letter : '?'
+    displayValue: function() {
+      return this.guessed || this.gameStatus === "lost" ? this.letter : "?";
     },
-    guessStatus: function () {
+    guessStatus: function() {
       if (this.guessed) {
-        return 'guessed flipped'
-      } else if (this.gameStatus === 'lost') {
-        return 'missed flipped'
+        return "guessed flipped";
+      } else if (this.gameStatus === "lost") {
+        return "missed flipped";
       } else {
-        return ''
+        return "";
       }
     },
-    revealStatus: function () {
-      return (this.guessed || this.gameStatus === 'lost') ? 'reveal' : ''
+    revealStatus: function() {
+      return this.guessed || this.gameStatus === "lost" ? "reveal" : "";
     }
   }
-}
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
 .flipped {
-  -webkit-animation: flip-horizontal-bottom 0.8s cubic-bezier(0.455, 0.030, 0.515, 0.955) both;
-  animation: flip-horizontal-bottom 0.8s cubic-bezier(0.455, 0.030, 0.515, 0.955) both;
+  -webkit-animation: flip-horizontal-bottom 0.8s
+    cubic-bezier(0.455, 0.03, 0.515, 0.955) both;
+  animation: flip-horizontal-bottom 0.8s cubic-bezier(0.455, 0.03, 0.515, 0.955)
+    both;
 }
 
 .reveal {
- -webkit-animation: text-focus-in 0.4s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
- animation: text-focus-in 0.4s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
+  -webkit-animation: text-focus-in 0.4s cubic-bezier(0.55, 0.085, 0.68, 0.53)
+    both;
+  animation: text-focus-in 0.4s cubic-bezier(0.55, 0.085, 0.68, 0.53) both;
 }
 
 /* ----------------------------------------------
@@ -63,26 +63,24 @@ export default {
  * ----------------------------------------
  */
 
-
-
 @-webkit-keyframes flip-horizontal-bottom {
   0% {
     -webkit-transform: rotateX(-180deg);
-            transform: rotateX(-180deg);
+    transform: rotateX(-180deg);
   }
   100% {
     -webkit-transform: rotateX(0);
-            transform: rotateX(0);
+    transform: rotateX(0);
   }
 }
 @keyframes flip-horizontal-bottom {
   0% {
     -webkit-transform: rotateX(-180deg);
-            transform: rotateX(-180deg);
+    transform: rotateX(-180deg);
   }
   100% {
     -webkit-transform: rotateX(0);
-            transform: rotateX(0);
+    transform: rotateX(0);
   }
 }
 
@@ -94,36 +92,35 @@ export default {
 @-webkit-keyframes text-focus-in {
   0% {
     -webkit-filter: blur(12px);
-            filter: blur(12px);
+    filter: blur(12px);
     opacity: 0;
   }
   30% {
     -webkit-filter: blur(12px);
-            filter: blur(12px);
+    filter: blur(12px);
     opacity: 0;
   }
   100% {
     -webkit-filter: blur(0px);
-            filter: blur(0px);
+    filter: blur(0px);
     opacity: 1;
   }
 }
 @keyframes text-focus-in {
   0% {
     -webkit-filter: blur(12px);
-            filter: blur(12px);
+    filter: blur(12px);
     opacity: 0;
   }
   30% {
     -webkit-filter: blur(12px);
-            filter: blur(12px);
+    filter: blur(12px);
     opacity: 0;
   }
   100% {
     -webkit-filter: blur(0px);
-            filter: blur(0px);
+    filter: blur(0px);
     opacity: 1;
   }
 }
-
 </style>

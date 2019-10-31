@@ -1,35 +1,48 @@
 <template>
   <div id="app">
-    <h1>
-      Potty Talk
-    </h1>
+    <h1>Potty Talk</h1>
     <p>
-      A mystery word game to accompany the <a href="http://toilettranscripts.com" target=”_blank”>Toilet Transcripts</a>
+      A mystery word game to accompany the
+      <a
+        href="http://toilettranscripts.com"
+        target="”_blank”"
+      >Toilet Transcripts</a>
     </p>
 
     <div id="word">
-        <div v-if="solution">
-          <SolutionTile
-            v-for="(letter, index) in solution"
-            v-bind:key="index"
-            :gameStatus="gameStatus"
-            :letter="letter"
-            :correctGuesses="correctGuesses">
-          </SolutionTile>
-        </div>
+      <div v-if="solution">
+        <SolutionTile
+          v-for="(letter, index) in solution"
+          v-bind:key="index"
+          :gameStatus="gameStatus"
+          :letter="letter"
+          :correctGuesses="correctGuesses"
+        ></SolutionTile>
+      </div>
     </div>
 
-    <div v-if="gameStatus !== 'pregame'" :class="{ warn: (maxStrikes - strikes) <= 2 }">
+    <div v-if="gameStatus !== 'pregame'" :class="{ warn: strikesRemaining < 3 }">
       <h2>Strikes: {{strikes}}</h2>
-      <h3>(<em>{{maxStrikes - strikes}} strikes remaining</em>)</h3>
-      <p v-if="liveGame && (strikes >= 4)">Uh oh! You're almost out of guesses. Go check out the <a href="http://toilettranscripts.com/glossary.html" target=”_blank”>Toilet Transcripts glossary</a> if you're feeling particularly stumped.</p>
+      <h3>
+        (
+        <em>{{strikesRemaining}} strikes remaining</em>)
+      </h3>
+      <p v-if="liveGame && (strikesRemaining > 1)">
+        Uh oh! You're almost out of guesses. Go check out the
+        <a
+          href="http://toilettranscripts.com/glossary.html"
+          target="”_blank”"
+        >Toilet Transcripts glossary</a> if you're feeling particularly stumped.
+      </p>
     </div>
 
     <div class="feedback">
       <p v-if="gameStatus === 'won'" class="won">🏆 You won! Congratulations! 🏆</p>
       <p v-if="gameStatus === 'lost'" class="lost">
         Oops. That didn't go so well. 🤦
-        <span v-if="correctGuesses.length">On the plus side, it's looking very Christmas-y up there ☝️</span>
+        <span
+          v-if="correctGuesses.length"
+        >On the plus side, it's looking very Christmas-y up there ☝️</span>
         Want to play again?
       </p>
       <p v-if="gameStatus === 'pregame'">Ready to get started?</p>
@@ -38,18 +51,16 @@
     <div v-if="!liveGame">
       <div>
         <p>Select a level:</p>
-        <input type='radio' id='easy' value='easy' v-model='level'>
-        <label for='easy'>Easy</label>
+        <input type="radio" id="easy" value="easy" v-model="level" />
+        <label for="easy">Easy</label>
 
-        <input type='radio' id='hard' value='hard' v-model='level'>
-        <label for='hard'>Hard</label>
+        <input type="radio" id="hard" value="hard" v-model="level" />
+        <label for="hard">Hard</label>
 
-        <input type='radio' id='surprise' value='surprise' v-model='level'>
-        <label for='surprise'>Surprise Me</label>
+        <input type="radio" id="surprise" value="surprise" v-model="level" />
+        <label for="surprise">Surprise Me</label>
       </div>
-      <button id="start" v-if="!liveGame"  v-on:click='startGame'>
-        Start New Game
-      </button>
+      <button id="start" v-if="!liveGame" v-on:click="startGame">Start New Game</button>
     </div>
 
     <div v-else>
@@ -57,98 +68,116 @@
       <GuessButton
         v-for="letter in alphabet"
         v-bind:key="letter"
-        v-on:guess-letter='onGuessLetter'
+        v-on:guess-letter="onGuessLetter"
         :letter="letter"
         :liveGame="liveGame"
-        :correct="isCorrect(letter)">
-      </GuessButton>
+        :correct="isCorrect(letter)"
+      ></GuessButton>
       <p>Guess a letter by clicking a button above. Make {{ maxStrikes }} incorrect guesses and you'll lose, so keep an eye on your strike tally. Remember, all words are toilet-themed.</p>
     </div>
   </div>
 </template>
 
 <script>
-import GuessButton from './components/GuessButton.vue'
-import SolutionTile from './components/SolutionTile.vue'
+import GuessButton from "./components/GuessButton.vue";
+import SolutionTile from "./components/SolutionTile.vue";
 
 export default {
-  name: 'app',
+  name: "app",
   components: {
     GuessButton,
     SolutionTile
   },
-  data: function () {
+  data: function() {
     return {
-      solutions: ["toilet", "potty", "bathroom", "disgusting", "flush", "nasty", "restroom", "terrible", "wrong", "smell", "gross", "consequences", "disappointed", "spilled", "trouble"],
-      alphabet: 'abcdefghijklmnopqrstuvwxyz'.split(''),
-      solution: '',
+      solutions: [
+        "toilet",
+        "potty",
+        "bathroom",
+        "disgusting",
+        "flush",
+        "nasty",
+        "restroom",
+        "terrible",
+        "wrong",
+        "smell",
+        "gross",
+        "consequences",
+        "disappointed",
+        "spilled",
+        "trouble"
+      ],
+      alphabet: "abcdefghijklmnopqrstuvwxyz".split(""),
+      solution: "",
       correctGuesses: [],
       incorrectGuesses: [],
-      level: 'surprise',
+      level: "surprise",
       strikes: 0,
       maxStrikes: 6
-    }
+    };
   },
   computed: {
-    easySolutions: function () {
-      return this.solutions.filter(word => word.length < 6)
+    easySolutions: function() {
+      return this.solutions.filter(word => word.length < 6);
     },
-    hardSolutions: function () {
-      return this.solutions.filter(word => word.length > 5)
+    hardSolutions: function() {
+      return this.solutions.filter(word => word.length > 5);
     },
-    uniqueCharacterCount: function () {
-      return Array.from(new Set(this.solution.split(''))).length
+    uniqueCharacterCount: function() {
+      return Array.from(new Set(this.solution.split(""))).length;
     },
-    liveGame: function () {
-      return this.gameStatus === "playing"
+    liveGame: function() {
+      return this.gameStatus === "playing";
     },
-    gameStatus: function () {
-      if (this.solution === '') {
-        return 'pregame'
-      } else if (this.strikes >= this.maxStrikes) {
-        return "lost"
+    strikesRemaining: function () {
+      return this.maxStrikes - this.strikes
+    },
+    gameStatus: function() {
+      if (this.solution === "") {
+        return "pregame";
+      } else if (this.strikesRemaining === 0) {
+        return "lost";
       } else if (this.correctGuesses.length === this.uniqueCharacterCount) {
-        return "won"
+        return "won";
       } else {
-        return 'playing'
+        return "playing";
       }
     }
   },
   methods: {
-    startGame: function () {
-      let oldSolution = this.solution
-      let words = []
+    startGame: function() {
+      let oldSolution = this.solution;
+      let words = [];
       if (this.level === "hard") {
-        words = this.hardSolutions
+        words = this.hardSolutions;
       } else if (this.level === "easy") {
-        words = this.easySolutions
+        words = this.easySolutions;
       } else {
-        words = this.solutions
+        words = this.solutions;
       }
       while (this.solution === oldSolution) {
-        this.solution = words[Math.floor(Math.random() * words.length)]
+        this.solution = words[Math.floor(Math.random() * words.length)];
       }
-      this.strikes = 0
-      this.correctGuesses = []
+      this.strikes = 0;
+      this.correctGuesses = [];
     },
-    isCorrect: function (letter) {
-      return this.solution.includes(letter)
+    isCorrect: function(letter) {
+      return this.solution.includes(letter);
     },
-    onGuessLetter: function (guessedLetter) {
+    onGuessLetter: function(guessedLetter) {
       if (this.isCorrect(guessedLetter)) {
-        this.correctGuesses.push(guessedLetter)
+        this.correctGuesses.push(guessedLetter);
       } else {
-        this.strikes ++
+        this.strikes++;
       }
     }
   }
-}
-
+};
 </script>
 
 <style>
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
