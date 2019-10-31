@@ -8,7 +8,7 @@
     </p>
 
     <div id="word">
-        <div v-if="solution && liveGame">
+        <div v-if="solution">
           <SolutionTile
             v-for="(letter, index) in solution"
             v-bind:key="index"
@@ -16,9 +16,6 @@
             :letter="letter"
             :correctGuesses="correctGuesses">
           </SolutionTile>
-        </div>
-        <div v-else-if="solution">
-          <div class="letter" v-for="(letter, index) in solution.split('')" v-bind:key="index" :class="[gameStatus, {correct: correctGuesses.includes(letter)}, {missed: !correctGuesses.includes(letter)}]">{{letter}}</div>
         </div>
     </div>
 
@@ -30,7 +27,11 @@
 
     <div class="feedback">
       <p v-if="gameStatus === 'won'" class="won">🏆 You won! Congratulations! 🏆</p>
-      <p v-if="gameStatus === 'lost'" class="lost">🤦 Oops. That didn't go so well. Want to play again? 🤦</p>
+      <p v-if="gameStatus === 'lost'" class="lost">
+        Oops. That didn't go so well. 🤦
+        <span v-if="correctGuesses.length">On the plus side, it's looking very Christmas-y up there ☝️</span>
+        Want to play again?
+      </p>
       <p v-if="gameStatus === 'pregame'">Ready to get started?</p>
     </div>
 
@@ -192,17 +193,13 @@ button.guess:disabled {
 }
 
 button.guess.correct:disabled,
-.letter.correct {
+.letter.guessed {
   background-color: green;
 }
 
 button.guess.incorrect:disabled,
-.letter.missed.lost {
+.letter.missed {
   background-color: red;
-}
-
-.letter.correct.lost {
-  background-color: black;
 }
 
 p.lost,
