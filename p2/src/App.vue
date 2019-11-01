@@ -5,7 +5,7 @@
       A mystery word game to accompany the
       <a
         href="http://toilettranscripts.com"
-        target="”_blank”"
+        target="_blank"
       >Toilet Transcripts</a>
     </p>
 
@@ -17,6 +17,7 @@
           :gameStatus="gameStatus"
           :letter="letter"
           :correctGuesses="correctGuesses"
+          :initialDisplayValue="initialDisplayValue"
         ></SolutionTile>
       </div>
     </div>
@@ -27,11 +28,11 @@
         (
         <em>{{strikesRemaining}} strikes remaining</em>)
       </h3>
-      <p v-if="liveGame && (strikesRemaining > 1)">
+      <p v-if="liveGame && (strikesRemaining < 3)">
         Uh oh! You're almost out of guesses. Go check out the
         <a
           href="http://toilettranscripts.com/glossary.html"
-          target="”_blank”"
+          target="_blank"
         >Toilet Transcripts glossary</a> if you're feeling particularly stumped.
       </p>
     </div>
@@ -113,7 +114,8 @@ export default {
       incorrectGuesses: [],
       level: "surprise",
       strikes: 0,
-      maxStrikes: 6
+      maxStrikes: 6,
+      initialDisplayValue: "?"
     };
   },
   computed: {
@@ -129,8 +131,8 @@ export default {
     liveGame: function() {
       return this.gameStatus === "playing";
     },
-    strikesRemaining: function () {
-      return this.maxStrikes - this.strikes
+    strikesRemaining: function() {
+      return this.maxStrikes - this.strikes;
     },
     gameStatus: function() {
       if (this.solution === "") {
