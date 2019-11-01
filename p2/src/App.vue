@@ -22,13 +22,13 @@
       </div>
     </div>
 
-    <div v-if="gameStatus !== 'pregame'" :class="{ warn: strikesRemaining < 3 }">
+    <div v-if="gameStatus !== 'pregame'" :class="{ warn: strikeDanger }">
       <h2>Strikes: {{strikes}}</h2>
       <h3>
         (
         <em>{{strikesRemaining}} strikes remaining</em>)
       </h3>
-      <p v-if="liveGame && (strikesRemaining < 3)">
+      <p v-if="liveGame && strikeDanger">
         Uh oh! You're almost out of guesses. Go check out the
         <a
           href="http://toilettranscripts.com/glossary.html"
@@ -65,7 +65,7 @@
     </div>
 
     <div v-else>
-      <p>Level: {{easySolutions.includes(solution) ? 'Easy' : 'Hard'}}</p>
+      <p>Level: {{ currentLevel }}</p>
       <GuessButton
         v-for="letter in alphabet"
         v-bind:key="letter"
@@ -125,6 +125,9 @@ export default {
     hardSolutions: function() {
       return this.solutions.filter(word => word.length > 5);
     },
+    currentLevel: function() {
+      return this.solution.length < 6 ? "Easy" : "Hard";
+    },
     uniqueCharacterCount: function() {
       return Array.from(new Set(this.solution.split(""))).length;
     },
@@ -133,6 +136,9 @@ export default {
     },
     strikesRemaining: function() {
       return this.maxStrikes - this.strikes;
+    },
+    strikeDanger: function() {
+      return this.strikesRemaining < 3;
     },
     gameStatus: function() {
       if (this.solution === "") {
