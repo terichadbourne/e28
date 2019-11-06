@@ -10,7 +10,7 @@
 import ShowProducts from "./components/ShowProducts.vue";
 
 export default {
-  name: 'ShowProducts',
+  name: 'app',
   components: {
     ShowProducts
   }
