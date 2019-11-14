@@ -4,7 +4,10 @@
     <nav>
       <ul>
         <li v-for='link in links' :key='link'>
-          <router-link :to='{ name: link }' exact>{{ link }}</router-link>
+            <router-link exact :to='{ name: link }'>
+                {{ link }}
+                <span v-if='link == "cart"'>({{ sharedState.cartCount }})</span>
+            </router-link>
         </li>
       </ul>
     </nav>
@@ -14,16 +17,20 @@
 </template>
 
 <script>
-import { products } from './products.js';
+import * as app from './app.js';
 
 export default {
   name: 'app',
   components: {},
   data: function() {
     return {
-      products: products,
-      links: ['home', 'products', 'categories']
-    };
+      links: ['home', 'products', 'categories', 'cart'],
+      sharedState: app.store
+    }
+  },
+  mounted() {
+    this.cart = new app.Cart()
+    this.cart = this.cart.count()
   }
 };
 </script>
