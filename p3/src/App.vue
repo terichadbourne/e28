@@ -16,7 +16,6 @@
 </template>
 
 <script>
-// import { people } from './people.js';
 
 export default {
   name: 'app',

@@ -1,6 +1,7 @@
 <template>
   <div id='products'>
     <h2>People</h2>
+    <div v-if="people">
       <div class="card person" v-for='person in people' :key='person.id' :person='person'>
         <h2>{{person.name}}</h2>
           <p v-if="person.rave">❤️
@@ -14,11 +15,15 @@
             </router-link>
           </p>
       </div>
+    </div>
+    <div v-else>
+      Loading records...
+    </div>
   </div>
 </template>
 
 <script>
-import { people } from './../../people.js';
+import * as app from './../../app.js';
 
 export default {
   name: 'People',
@@ -26,12 +31,15 @@ export default {
   },
   data: function() {
     return {
-      people: people
+      people: null
     }
   },
   mounted() {
+    app.axios.get(app.config.api + 'people').then(response => {
+      this.people = response.data
+    })
   }
-};
+}
 </script>
 
 <style scoped>

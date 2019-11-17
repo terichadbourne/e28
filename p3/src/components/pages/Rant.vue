@@ -12,25 +12,20 @@
 </template>
 
 <script>
-import { people } from './../../people.js';
+import * as app from './../../app.js';
 
 export default {
   name: 'Rant',
   props: ['id'],
   data: function() {
     return {
-      people: people
-    }
-  },
-  computed: {
-    person: function() {
-      const id = parseInt(this.id)
-      return this.people.filter(person => person.id === id)[0]
+      person: null
     }
   },
   mounted() {
-    console.log(`this.id: `, this.id)
-    console.log(`people: `, people)
+    app.axios.get(app.config.api + 'people/' + this.id).then(response => {
+      this.person = response.data
+    })
   }
 };
 </script>
