@@ -1,24 +1,15 @@
-# p3
+*Any instructions/notes in italics should be removed from the template before submitting.*
 
-## Project setup
-```
-npm install
-```
+# Project 3
++ By: Teri Chadbourne
++ Production URL: <http://p3.yourdomain.com>
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
 
-### Compiles and minifies for production
-```
-npm run build
-```
+## Outline of features
+*Brief list summarizing the features of your app*
 
-### Lints and fixes files
-```
-npm run lint
-```
+## Outside resources
+*Your list of outside resources go here.*
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+## Notes for instructor
+*Any notes for me to refer to while grading; if none, omit this section.*

@@ -1,10 +1,11 @@
 <template>
-  <div id='products'>
+  <div>
     <h2>Rants</h2>
-      <div class="card rant" v-for='person in rantingPeople' :key='person.id' :person='person'>
-        <h2>{{person.rant}}</h2>
-        <p>- {{person.name}}</p>
-      </div>
+      <router-link :to='{ name: "rant", params: {"id" : person.id }}' v-for='person in rantingPeople' :key='person.id' :person='person'>
+        <div class="card rant">
+          <h2>{{person.rant}}</h2>
+        </div>
+      </router-link>
   </div>
 </template>
 
