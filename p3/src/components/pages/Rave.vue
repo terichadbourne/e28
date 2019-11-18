@@ -1,10 +1,9 @@
 <template>
   <div>
     <h2>Rave {{id}}</h2>
-      <div v-if="person && person.rave.length > 0" class="card rave">
-        <h2>{{person.rave}}</h2>
-        <p>- {{person.name}}</p>
-      </div>
+    <div v-if="person && person.rave.length > 0">
+      <FeedbackCard :type="type" :detailed="true" :message="person.rave" :name="person.name"/>
+    </div>
       <div v-else>
         <p>Oops! There's no rave with that ID.</p>
       </div>
@@ -13,13 +12,18 @@
 
 <script>
 import * as app from './../../app.js';
+import FeedbackCard from './../FeedbackCard.vue'
 
 export default {
   name: 'Rave',
   props: ['id'],
+  components: {
+    FeedbackCard
+  },
   data: function() {
     return {
-      person: null
+      person: null,
+      type: "rave"
     }
   },
   mounted() {

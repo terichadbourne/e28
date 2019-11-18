@@ -1,11 +1,9 @@
 <template>
-  <div id='products'>
+  <div>
     <h2>Raves</h2>
     <div v-if="people && ravingPeople">
       <router-link :to='{ name: "rave", params: {"id" : person.id }}' v-for='person in ravingPeople()' :key='person.id' :person='person'>
-        <div class="card rave" >
-          <h2>{{person.rave}}</h2>
-        </div>
+        <FeedbackCard :type="type" :detailed="false" :message="person.rave" :name="person.name"/>
       </router-link>
     </div>
     <div v-else>
@@ -17,14 +15,17 @@
 
 <script>
 import * as app from './../../app.js';
+import FeedbackCard from './../FeedbackCard.vue'
 
 export default {
   name: 'Raves',
   components: {
+    FeedbackCard
   },
   data: function() {
     return {
-      people: null
+      people: null,
+      type: "rave"
     }
   },
   methods: {
