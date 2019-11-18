@@ -2,7 +2,7 @@
   <div>
     <h2>Rave {{id}}</h2>
     <div v-if="person && person.rave.length > 0">
-      <FeedbackCard :type="type" :detailed="true" :message="person.rave" :name="person.name"/>
+      <FeedbackCard :type="type" :detailed="true" :message="person.rave" :name="person.name" :id="person.id"/>
     </div>
       <div v-else>
         <p>Oops! There's no rave with that ID.</p>

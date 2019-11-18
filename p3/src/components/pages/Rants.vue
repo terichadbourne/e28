@@ -3,7 +3,7 @@
     <h2>Rants</h2>
     <div v-if="people && rantingPeople">
       <router-link :to='{ name: "rant", params: {"id" : person.id }}' v-for='person in rantingPeople()' :key='person.id' :person='person'>
-        <FeedbackCard :type="type" :detailed="false" :message="person.rant" :name="person.name"/>
+        <FeedbackCard :type="type" :detailed="false" :message="person.rant" :name="person.name" :id="person.id"/>
       </router-link>
     </div>
     <div v-else>
