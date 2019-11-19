@@ -3,13 +3,14 @@
     <h2>Rants</h2>
       <!-- <p>sharedFavorites:
         {{sharedState.favorites}}</p> -->
-    <button v-on:click="toggleFilter">Show
-      <span v-if="filtered">All</span>
-      <span v-else>Favorites</span>
-    </button>
+    <div>
+      <input type="radio" id="all" :value="false" v-model="filtered" />
+      <label for="all">All</label>
+
+      <input type="radio" id="favorites" :value="true" v-model="filtered" />
+      <label for="favorites">Favorites</label>
+    </div>
     <div v-if="people && rantingPeople" :class="{ filtered: filtered }">
-      <p v-if="filtered">Favorite Rants</p>
-      <p v-else>All Rants</p>
       <router-link :to='{ name: "rant", params: {"id" : person.id }}' v-for='person in rantingPeople' :key='person.id' :person='person' >
         <FeedbackCard :type="type" :detailed="false" :message="person.rant" :name="person.name" :id="person.id" v-on:update-favorites="updateFavorites"/>
       </router-link>
