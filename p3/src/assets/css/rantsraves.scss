@@ -80,6 +80,10 @@ header {
   padding: 10px;
 }
 
+div.filtered .card:not(.favorite) {
+  display: none;
+}
+
 .person {
   background-color: $aqua;
   color: $navy;
@@ -107,7 +111,7 @@ header {
   align: center;
   cursor: pointer;
 }
-.favorite-icon.favorite {
+.favorite .favorite-icon{
   color: #005e8f;
   border: 2px #005e8f solid;
 }

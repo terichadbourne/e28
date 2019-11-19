@@ -1,10 +1,9 @@
 <template>
   <div>
-      <div class="card" :class="type">
+      <div class="card" :class="{ favorite: isFavorite, rant: type=='rant', rave: type=='rave' }">
         <h2>{{message}}</h2>
         <p v-if="detailed">- {{name}}</p>
         <button
-          v-bind:class="{ favorite: isFavorite }"
           class="favorite-icon"
           v-on:click.prevent="toggleFavorite"
           :aria-label="ariaLabel">❤
@@ -14,6 +13,7 @@
 </template>
 
 <script>
+import * as app from './../app.js';
 
 export default {
   name: 'FeedbackCard',
@@ -27,14 +27,20 @@ export default {
   },
   methods: {
     updateFavoriteState () {
-      this.isFavorite = window.localStorage.getItem(this.cacheKey)
+      let favorites = new app.Favorites()
+      this.isFavorite = favorites.getItem(this.cacheKey)
       this.ariaLabel = this.isFavorite ? "Remove from favorites" : "Add to favorites"
+      app.store.favorites = favorites.getItems()
+      console.log('about to emit')
+      this.$emit('update-favorites', event)
+      console.log('just emitted')
     },
     toggleFavorite () {
+      let favorites = new app.Favorites()
       if (this.isFavorite) {
-        window.localStorage.removeItem(this.cacheKey)
+        favorites.remove(this.cacheKey);
       } else {
-        window.localStorage.setItem(this.cacheKey, true)
+        favorites.add(this.cacheKey)
       }
       this.updateFavoriteState()
     }
