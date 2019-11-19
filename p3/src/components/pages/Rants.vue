@@ -34,7 +34,6 @@ export default {
     return {
       people: null,
       type: "rant",
-      allLocalStorage: null,
       sharedState: app.store,
       filtered: false,
       favorites: null
