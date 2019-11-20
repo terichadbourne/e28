@@ -2,6 +2,13 @@ import * as app from './app.js';
 
 export default class Favorites {
 
+  // {
+  //   favorites: {
+  //     rants: [1, 3, 5],
+  //     raves: [2, 4]
+// }
+
+
     /**
      *
      */
@@ -10,14 +17,27 @@ export default class Favorites {
         let favorites = localStorage.getItem('favorites');
 
         // Parse JSON cart String to `items` object
-        this.items = (favorites) ? JSON.parse(favorites) : [];
+        this.items = (favorites) ? JSON.parse(favorites) : {
+          "favoriteRants": [],
+          "favoriteRaves": []
+        };
 
     }
 
+    getKey(type) {
+      if (type === 'rant') {
+        return 'favoriteRants'
+      } else if (type === 'rave') {
+        return 'favoriteRaves'
+      } else {
+        console.log('unknown type')
+      }
+    }
     /**
      * Getter method for items
      */
     getItems() {
+      console.log
         return this.items;
     }
 
@@ -44,16 +64,17 @@ export default class Favorites {
     /**
      * Add a new item of the given productId
      */
-    add(cacheKey) {
-
+    add(type, id) {
+        let key = this.getKey(type)
         // First see if product is already present
-        let item = this.getItem(cacheKey)
+        let item = this.getItem(type, id)
+
 
         if (!item) {
-            // Product not in cart, add as new item
-            this.items.push({
-              id: cacheKey,
-            });
+          this.items[key].push(id)
+          console.log('added item and this.items is: ', this.items)
+        } else {
+          console.log('item was already there')
         }
 
         this.update();
@@ -62,13 +83,14 @@ export default class Favorites {
     /**
      * Remove an item from items via productId
      */
-    remove(cacheKey) {
-        let item = this.getItem(cacheKey);
+    remove(type, id) {
+        let key = this.getKey(type)
+        let item = this.getItem(type, id);
 
-        let itemIndex = this.items.indexOf(item);
+        let itemIndex = this.items[key].indexOf(item);
 
         if (item) {
-            this.items.splice(itemIndex, 1);
+            this.items[key].splice(itemIndex, 1);
             this.update();
         }
     }
@@ -77,8 +99,8 @@ export default class Favorites {
      * Get an item from items via productId
      * Returns null if product does not exist in items
      */
-    getItem(cacheKey) {
-
-        return this.items.find(({ id }) => id === cacheKey) || null;
+    getItem(type, id) {
+      let key = this.getKey(type)
+        return this.items[key] && this.items[key].includes(id) || null;
     }
 }

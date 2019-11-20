@@ -20,7 +20,6 @@ export default {
   props: ['type', 'detailed', 'message', 'name', 'id'],
   data: function () {
     return {
-      cacheKey: null,
       isFavorite: null,
       ariaLabel: null
     }
@@ -28,7 +27,7 @@ export default {
   methods: {
     updateFavoriteState () {
       let favorites = new app.Favorites()
-      this.isFavorite = favorites.getItem(this.cacheKey)
+      this.isFavorite = favorites.getItem(this.type, this.id)
       this.ariaLabel = this.isFavorite ? "Remove from favorites" : "Add to favorites"
       app.store.favorites = favorites.getItems()
       console.log('about to emit')
@@ -38,15 +37,14 @@ export default {
     toggleFavorite () {
       let favorites = new app.Favorites()
       if (this.isFavorite) {
-        favorites.remove(this.cacheKey);
+        favorites.remove(this.type, this.id);
       } else {
-        favorites.add(this.cacheKey)
+        favorites.add(this.type, this.id)
       }
       this.updateFavoriteState()
     }
   },
   mounted () {
-    this.cacheKey = `${this.type}-${this.id}`
     this.updateFavoriteState()
   }
 }

@@ -7,5 +7,6 @@ export const config = {
 }
 
 export let store = {
-  "someKey": "someValue"
+  'favoriteRants': [],
+  'favoriteRaves': []
 }
