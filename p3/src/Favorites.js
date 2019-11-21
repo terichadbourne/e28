@@ -2,21 +2,14 @@ import * as app from './app.js';
 
 export default class Favorites {
 
-  // {
-  //   favorites: {
-  //     rants: [1, 3, 5],
-  //     raves: [2, 4]
-// }
-
-
     /**
      *
      */
     constructor() {
-        // Extract JSON cart string from local storage
+        // Extract JSON favorites string from local storage
         let favorites = localStorage.getItem('favorites');
 
-        // Parse JSON cart String to `items` object
+        // Parse JSON favorites String to `items` object
         this.items = (favorites) ? JSON.parse(favorites) : {
           "favoriteRants": [],
           "favoriteRaves": []
@@ -24,41 +17,35 @@ export default class Favorites {
 
     }
 
+    // get key based on review type
     getKey(type) {
       if (type === 'rant') {
         return 'favoriteRants'
       } else if (type === 'rave') {
         return 'favoriteRaves'
-      } else {
-        console.log('unknown type')
       }
     }
     /**
      * Getter method for items
      */
     getItems() {
-      console.log
         return this.items;
     }
 
-    /**
-     * Returns how many total items are in the cart
-     */
-    // count() {
-    //     let sum = 0;
-    //     for (let key of Object.keys(this.items)) {
-    //         sum += this.items[key].quantity;
-    //     }
-    //     return sum;
-    // }
+    // count items of a particular type
+    countItems(type) {
+      let key = this.getKey(type)
+      console.log(`countItems ${type}`, this.items[key].length)
+      return this.items[key].length
+    }
+
 
     /**
-     * Updates cart in localstorage
+     * Update favorites in localstorage and app.store
      */
     update() {
         localStorage.setItem('favorites', JSON.stringify(this.items))
-        app.store.favorites = this.getItems();
-        console.log('app.store.favorites is ', app.store.favorites)
+        app.store.faves = this.getItems();
     }
 
     /**
@@ -69,12 +56,8 @@ export default class Favorites {
         // First see if product is already present
         let item = this.getItem(type, id)
 
-
         if (!item) {
           this.items[key].push(id)
-          console.log('added item and this.items is: ', this.items)
-        } else {
-          console.log('item was already there')
         }
 
         this.update();
@@ -96,8 +79,8 @@ export default class Favorites {
     }
 
     /**
-     * Get an item from items via productId
-     * Returns null if product does not exist in items
+     * Get an item from items via typpe and id
+     * Returns null if it doesn't exist  
      */
     getItem(type, id) {
       let key = this.getKey(type)

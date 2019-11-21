@@ -7,6 +7,12 @@ export const config = {
 }
 
 export let store = {
-  'favoriteRants': [],
-  'favoriteRaves': []
+  "faves": {
+    "favoriteRants": [],
+    "favoriteRaves": []
+  },
+  "favoriteRantCount": 0,
+  "hasFavoriteRants": false,
+  "favoriteRaveCount": 0,
+  "hasFavoriteRaves": false
 }
