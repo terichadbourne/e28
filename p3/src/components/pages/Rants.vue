@@ -55,8 +55,8 @@ export default {
       }
     },
     updateFavorites: function () {
-      console.log('in updateFavorites in rants')
-      app.store.favorites = this.favorites.getItems()
+      app.store.faves = this.favorites.getItems()
+      this.$forceUpdate()
     }
   },
   mounted() {

@@ -29,10 +29,8 @@ export default {
     updateFavoriteState () {
       this.isFavorite = this.favorites.getItem(this.type, this.id)
       this.ariaLabel = this.isFavorite ? "Remove from favorites" : "Add to favorites"
-      app.store.favorites = this.favorites.getItems()
-      console.log('about to emit')
+      app.store.faves = this.favorites.getItems()
       this.$emit('update-favorites', event)
-      console.log('just emitted')
     },
     toggleFavorite () {
       if (this.isFavorite) {
