@@ -21,30 +21,30 @@ export default {
   data: function () {
     return {
       isFavorite: null,
-      ariaLabel: null
+      ariaLabel: null,
+      favorites: null
     }
   },
   methods: {
     updateFavoriteState () {
-      let favorites = new app.Favorites()
-      this.isFavorite = favorites.getItem(this.type, this.id)
+      this.isFavorite = this.favorites.getItem(this.type, this.id)
       this.ariaLabel = this.isFavorite ? "Remove from favorites" : "Add to favorites"
-      app.store.favorites = favorites.getItems()
+      app.store.favorites = this.favorites.getItems()
       console.log('about to emit')
       this.$emit('update-favorites', event)
       console.log('just emitted')
     },
     toggleFavorite () {
-      let favorites = new app.Favorites()
       if (this.isFavorite) {
-        favorites.remove(this.type, this.id);
+        this.favorites.remove(this.type, this.id);
       } else {
-        favorites.add(this.type, this.id)
+        this.favorites.add(this.type, this.id)
       }
       this.updateFavoriteState()
     }
   },
   mounted () {
+    this.favorites = new app.Favorites()
     this.updateFavoriteState()
   }
 }

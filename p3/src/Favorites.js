@@ -80,7 +80,7 @@ export default class Favorites {
 
     /**
      * Get an item from items via typpe and id
-     * Returns null if it doesn't exist  
+     * Returns null if it doesn't exist
      */
     getItem(type, id) {
       let key = this.getKey(type)
