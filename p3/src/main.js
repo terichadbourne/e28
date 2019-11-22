@@ -16,8 +16,6 @@ const routes = [
   { path: '/raves', name: 'raves', component: Raves},
   { path: '/raves/:id', name: 'rave', component: Rave, props: true },
   { path: '/rants/:id', name: 'rant', component: Rant, props: true }
-  // { path: '/products/:id', name: 'product', component: ProductPage, props: true },
-  // { path: '/cart', name: 'cart', component: CartPage }
 ]
 
 const router = new VueRouter({

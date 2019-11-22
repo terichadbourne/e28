@@ -35,7 +35,6 @@ export default class Favorites {
     // count items of a particular type
     countItems(type) {
       let key = this.getKey(type)
-      console.log(`countItems ${type}`, this.items[key].length)
       return this.items[key].length
     }
 
