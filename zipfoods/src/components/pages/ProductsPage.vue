@@ -7,7 +7,7 @@
 
 <script>
 import ShowProduct from './../ShowProduct.vue';
-import * as app from './../../app.js';
+// import * as app from './../../app.js';
 
 export default {
   name: 'ProductsPage',
@@ -15,16 +15,15 @@ export default {
     ShowProduct
   },
   data: function() {
-    return {
-      products: null
+    return {}
+  },
+  computed: {
+    products: function() {
+      return this.$store.state.products;
     }
   },
   mounted() {
-      app.axios.get(app.config.api + 'products').then(response => {
-        // console.log(response)
-        // console.log(response.data)
-          this.products = response.data;
-      });
+
   }
 };
 </script>

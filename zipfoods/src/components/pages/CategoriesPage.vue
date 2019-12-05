@@ -8,28 +8,28 @@
 </template>
 
 <script>
-import * as app from './../../app.js';
+// import * as app from './../../app.js';
 export default {
     name: 'CategoriesPage',
     data: function() {
-        return {
-            products: null,
-            categories: null
-        };
+        return {};
+    },
+    computed: {
+      products: function() {
+        return this.$store.state.products;
+      },
+      categories: function () {
+        let categories = this.products.map(product => product.categories);
+        let mergedCategories = [].concat.apply([], categories);
+        // Return unique, sorted categories
+        return [...new Set(mergedCategories)].sort();
+      }
     },
     methods: {
-        loadCategories: function() {
-            let categories = this.products.map(product => product.categories);
-            let mergedCategories = [].concat.apply([], categories);
-            // Return unique, sorted categories
-            this.categories = [...new Set(mergedCategories)].sort();
-        }
+
     },
     mounted() {
-        app.axios.get(app.config.api + 'products').then(response => {
-            this.products = response.data;
-            this.loadCategories();
-        });
+      this.loadCategories();
     }
 };
 </script>

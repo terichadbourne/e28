@@ -28,14 +28,16 @@ export default {
     props: ['id'],
     data: function() {
       return {
-        product: null,
         addAlert: null
       }
     },
+    computed: {
+      product: function() {
+        return this.$store.getters.getProductById(this.id);
+      }
+    },
     mounted() {
-      app.axios.get(app.config.api + 'products/' + this.id).then(response => {
-        this.product = response.data
-      })
+
     },
     methods: {
       addToCart: function(productId) {
