@@ -1,6 +1,6 @@
 <template>
   <div class='product'>
-      <router-link :to='{ name: "product", params: {"id" : product.id }}'>
+      <router-link data-test="product-link" :to='{ name: "product", params: {"id" : product.id }}'>
           <div class='product-name'>{{ product.name }}</div>
           <img
               class='product-thumb'
