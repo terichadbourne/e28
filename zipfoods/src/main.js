@@ -6,6 +6,7 @@ import ProductPage from './components/pages/ProductPage.vue';
 import HomePage from './components/pages/HomePage.vue';
 import CategoriesPage from './components/pages/CategoriesPage.vue';
 import CartPage from './components/pages/CartPage.vue';
+import store from './store'
 
 Vue.use(VueRouter)
 Vue.config.productionTip = false
@@ -24,6 +25,7 @@ const router = new VueRouter({
 })
 
 new Vue({
+  store: store,
   router: router,
   render: h => h(App),
 }).$mount('#app')

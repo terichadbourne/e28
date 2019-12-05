@@ -30,7 +30,8 @@ export default {
         },
         removeFromCart: function(productId) {
             this.cart.remove(productId);
-            app.store.cartCount = this.cart.count();
+            // app.store.cartCount = this.cart.count();
+            this.$store.commit('setCartCount', this.cart.count());
         }
     },
     mounted() {

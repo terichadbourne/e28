@@ -6,7 +6,7 @@
         <li v-for='link in links' :key='link'>
             <router-link exact :to='{ name: link }'>
                 {{ link }}
-                <span v-if='link == "cart"'>({{ sharedState.cartCount }})</span>
+                <span v-if='link == "cart"'>({{ cartCount }})</span>
             </router-link>
         </li>
       </ul>
@@ -22,15 +22,21 @@ import * as app from './app.js';
 export default {
   name: 'app',
   components: {},
+
   data: function() {
     return {
-      links: ['home', 'products', 'categories', 'cart'],
-      sharedState: app.store
+      links: ['home', 'products', 'categories', 'cart']
+    }
+  },
+  computed: {
+    cartCount: function() {
+        return this.$store.state.cartCount;
     }
   },
   mounted() {
     this.cart = new app.Cart()
-    this.cart = this.cart.count()
+    // Invoke the `setCartCount` mutation, passing the cart count as the payload
+    this.$store.commit('setCartCount', this.cart.count());
   }
 };
 </script>
