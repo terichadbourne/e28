@@ -6,6 +6,7 @@ import Rants from './components/pages/Rants.vue';
 import Raves from './components/pages/Raves.vue';
 import Rave from './components/pages/Rave.vue';
 import Rant from './components/pages/Rant.vue';
+import store from './store'
 
 Vue.use(VueRouter)
 Vue.config.productionTip = false
@@ -24,6 +25,7 @@ const router = new VueRouter({
 })
 
 new Vue({
+  store: store,
   router: router,
   render: h => h(App),
 }).$mount('#app')
