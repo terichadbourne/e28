@@ -1,17 +1,49 @@
 <template>
     <div id='product-create'>
         <h1>Add a Product</h1>
-        <form @submit.prevent="handleSubmit">
+        <form @submit.prevent='handleSubmit'>
             <div class='form-group'>
                 <label for='name'>URL</label>
-                <input type='text' id='slug' v-model='product.slug' />
+                <input
+                    type='text'
+                    :class='{ "form-input-error": $v.product.slug.$error }'
+                    id='slug'
+                    v-model='$v.product.slug.$model'
+                />
+
+                <div v-if='$v.product.slug.$error'>
+                    <div
+                        class='form-feedback-error'
+                        v-if='!$v.product.slug.required'
+                    >Product URL is required.</div>
+                    <div
+                        class='form-feedback-error'
+                        v-else-if='!$v.product.slug.minLength'
+                    >Product URL must be at least 4 characters long.</div>
+
+                    <div
+                        class='form-feedback-error'
+                        v-else-if='!$v.product.slug.doesNotExist'
+                    >This URL is not available.</div>
+                </div>
 
                 <small class='form-help'>Min: 4</small>
             </div>
 
             <div class='form-group'>
                 <label for='name'>Name</label>
-                <input type='text' id='name' v-model='product.name' />
+                <input
+                    type='text'
+                    :class='{ "form-input-error": $v.product.name.$error }'
+                    id='name'
+                    v-model='$v.product.name.$model'
+                />
+                <div v-if='$v.product.name.$error'>
+                    <div
+                        class='form-feedback-error'
+                        v-if='!$v.product.name.required'
+                    >Product name is required.</div>
+                </div>
             </div>
 
             <div class='form-group'>
@@ -45,12 +77,15 @@
 
             <button type='submit'>Add Product</button>
 
+            <div class='form-feedback-error' v-if='formHasErrors'>Please correct the above errors</div>
         </form>
     </div>
 </template>
 
 <script>
 import * as app from './../../app.js';
+import { required, minLength } from 'vuelidate/lib/validators'
+
 let product = {};
 // If in dev mode, we'll pre-fill the product to make demo/testing easier
 if (process.env.NODE_ENV == 'development') {
@@ -79,27 +114,46 @@ export default {
     name: 'ProductCreatePage',
     data: function() {
         return {
-            product: product
+            product: product,
+            formHasErrors: false
         };
+    },
+    watch: {
+      '$v.$anyError': function () {
+        this.formHasErrors = this.$v.$anyError
+      }
     },
     methods: {
       handleSubmit: function () {
-        // Validate product info from form
-        // Axios request to server to persist new product
-        app.axios
-          .post((app.config.api + 'products.json'), this.product)
-          .then(response => {
-              console.log(response)
-              let key = response.data.name
-              this.$store.commit('addProduct', { [key]: this.product })
-              this.$router.push({
-                name: 'product',
-                params: {slug: this.product.slug}
-              })
-        });
-        // update Vuex store
+        if (!this.formHasErrors) {
+          app.axios
+            .post((app.config.api + 'products.json'), this.product)
+            .then(response => {
+                console.log(response)
+                let key = response.data.name
+                this.$store.commit('addProduct', { [key]: this.product })
+                this.$router.push({
+                  name: 'product',
+                  params: {slug: this.product.slug}
+                })
+          });
+        }
       }
-    }
+    },
+    validations: {
+      product: {
+          slug: {
+              required,
+              minLength: minLength(4),
+              doesNotExist(value) {
+                  return !this.$store.getters.getProductBySlug(value);
+              }
+          },
+          name: {
+              required
+          }
+      }
+  }
 };
 </script>
 
