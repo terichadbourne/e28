@@ -22,8 +22,11 @@ export default new Vuex.Store({
     },
     actions: {
       setProducts(context) {
-        app.axios.get(app.config.api + 'products').then(response => {
-            context.commit('setProducts', response.data);
+        // TO RETURN TO TYPICODE:
+        // app.axios.get(app.config.api + 'products').then(response => {
+        //   context.commit('setProducts', response.data);
+        app.axios.get(app.config.api + 'products.json').then(response => {
+            context.commit('setProducts', response.data.slice(1));
         });
       }
     },
