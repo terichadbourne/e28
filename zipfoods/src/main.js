@@ -7,7 +7,8 @@ import HomePage from './components/pages/HomePage.vue';
 import CategoriesPage from './components/pages/CategoriesPage.vue';
 import CartPage from './components/pages/CartPage.vue';
 import ProductCreatePage from './components/pages/ProductCreatePage.vue';
-import store from './store'
+import store from './store';
+import './filters.js';
 
 /* eslint-disable no-unused-vars */
 const _ = require('lodash');

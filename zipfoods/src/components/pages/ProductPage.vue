@@ -5,7 +5,7 @@
               v-if='product.slug'
               class='product-thumb'
               :alt='"Product image of  " + product.name'
-              :src='"./../../assets/images/products/" + product.slug + ".jpg"'
+              :src='product.slug | productImage'
           />
           <p class='description'>{{ product.description }}</p>
           <div class='price'>${{ product.price }}</div>
