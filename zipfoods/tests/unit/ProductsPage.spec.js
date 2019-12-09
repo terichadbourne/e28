@@ -5,7 +5,7 @@ import ProductsPage from '@/components/pages/ProductsPage.vue'
 describe('ProductsPage.vue', () => {
 
     let product = {
-        id: 1,
+        slug: 'driscolls-strawberries',
         name: 'Driscoll’s Strawberries',
         description:
             'Driscoll’s Strawberries are consistently the best, sweetest, juiciest strawberries available. This size is the best selling, as it is both convenient for completing a cherished family recipes and for preparing a quick snack straight from the fridge.',

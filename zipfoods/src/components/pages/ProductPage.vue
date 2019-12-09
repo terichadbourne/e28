@@ -2,15 +2,15 @@
   <div id='product-page' v-if='product'>
           <h1 data-test="product-name">{{ product.name }}</h1>
           <img
-              v-if='product.id'
+              v-if='product.slug'
               class='product-thumb'
               :alt='"Product image of  " + product.name'
-              :src='"./../../assets/images/products/" + product.id + ".jpg"'
+              :src='"./../../assets/images/products/" + product.slug + ".jpg"'
           />
           <p class='description'>{{ product.description }}</p>
           <div class='price'>${{ product.price }}</div>
 
-          <button data-test='add-to-cart-button'  @click='addToCart(product.id)'>Add to cart</button>
+          <button data-test='add-to-cart-button'  @click='addToCart(product.slug)'>Add to cart</button>
 
           <transition name='fade'>
               <div class='alert' v-if='addAlert'>Your cart has been updated!</div>
@@ -25,7 +25,7 @@ import * as app from './../../app.js';
 
 export default {
     name: 'ProductPage',
-    props: ['id'],
+    props: ['slug'],
     data: function() {
       return {
         addAlert: null
@@ -33,16 +33,17 @@ export default {
     },
     computed: {
       product: function() {
-        return this.$store.getters.getProductById(this.id);
+        return this.$store.getters.getProductBySlug(this.slug);
       }
     },
     mounted() {
 
     },
     methods: {
-      addToCart: function(productId) {
+      addToCart: function(productSlug) {
           let cart = new app.Cart();
-          cart.add(productId);
+          console.log(`in addToCart and slug is ${productSlug}`)
+          cart.add(productSlug);
           // app.store.cartCount = cart.count();
           this.$store.commit('updateCartCount', 1);
           this.addAlert = true;

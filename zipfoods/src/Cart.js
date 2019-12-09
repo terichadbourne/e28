@@ -39,10 +39,12 @@ export default class Cart {
     /**
      * Add a new item of the given productId
      */
-    add(productId, quantity = 1) {
-
+    add(productSlug, quantity = 1) {
+        console.log(`in cart.add and slug is ${productSlug}`)
+        console.log(this.items)
         // First see if product is already present
-        let item = this.getItem(productId)
+        let item = this.getItem(productSlug)
+        console.log(item)
 
         if (item) {
             // Product is in cart already; increment quantity by 1
@@ -51,10 +53,12 @@ export default class Cart {
         } else {
             // Product not in cart, add as new item
             this.items.push({
-                id: productId,
+                slug: productSlug,
                 quantity: quantity
             });
         }
+
+        console.log(this.items)
 
         this.update();
     }
@@ -62,8 +66,8 @@ export default class Cart {
     /**
      * Remove an item from items via productId
      */
-    remove(productId) {
-        let item = this.getItem(productId);
+    remove(productSlug) {
+        let item = this.getItem(productSlug);
 
         let itemIndex = this.items.indexOf(item);
 
@@ -77,7 +81,9 @@ export default class Cart {
      * Get an item from items via productId
      * Returns null if product does not exist in items
      */
-    getItem(productId) {
-        return this.items.find(({ id }) => id === productId) || null;
+    getItem(productSlug) {
+        console.log(`in cart.getItem and slug is ${productSlug}`)
+        console.log(this.items.find(({ slug }) => slug === productSlug) || null)
+        return this.items.find(({ slug }) => slug === productSlug) || null;
     }
 }

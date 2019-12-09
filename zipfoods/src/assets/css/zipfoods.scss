@@ -158,3 +158,85 @@ MISC
     list-style-type: none;
     padding: 0;
 }
+
+/*----------------------------------------------------
+Forms
+-----------------------------------------------------*/
+form {
+    text-align: left;
+}
+
+label {
+    display: block;
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    margin: 10px 0 5px 0;
+    font-weight: bold;
+}
+
+input[type=text],
+textarea {
+    font-size: 1.6rem;
+    padding: 5px;
+    width: 100%;
+    border: 1px solid $silver;
+
+    &.form-input-error {
+        border: 1px solid $red;
+    }
+}
+
+label.form-checkbox-label {
+    text-transform: none;
+}
+
+.form-group {
+    margin: 20px 0;
+}
+
+.form-help {
+    font-size: 1.4rem;
+    color: $gray;
+    margin-top: 5px;
+}
+
+.form-feedback {
+    font-size: 1.3rem;
+    font-weight: bold;
+    padding: 10px 0;
+}
+
+.form-feedback-error {
+    color: $red;
+    @extend .form-feedback;
+}
+
+.form-feedback-success {
+    color: $green;
+    @extend .form-feedback;
+}
+
+button {
+    background-color: $blue;
+    font-size: 20px;
+    border-radius: 5px;
+    border: 0;
+    padding: 10px;
+    color: white;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: darken($blue, 10%);
+}
+
+input[type=checkbox],
+input[type=radio] {
+    vertical-align: middle;
+    position: relative;
+    bottom: 1px;
+}
+
+input[type=radio] {
+    bottom: 2px;
+}

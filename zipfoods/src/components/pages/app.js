@@ -7,8 +7,8 @@ export const axios = require('axios');
 // https://e28-zipfoods-teri.firebaseio.com/products/1.json
 
 export const config = {
-    // TO RETURN TO TYPICODE:
-    //api: 'https://my-json-server.typicode.com/terichadbourne/e28-zipfoods-api/'
+    // TO RETURN TO TYPICODE: 
+    // api: 'https://my-json-server.typicode.com/terichadbourne/e28-zipfoods-api/'
     api: 'https://e28-zipfoods-teri.firebaseio.com/'
 }
 

@@ -25,7 +25,7 @@ export default {
 
   data: function() {
     return {
-      links: ['home', 'products', 'categories', 'cart']
+      links: ['home', 'products', 'categories', 'cart', 'create']
     }
   },
   computed: {

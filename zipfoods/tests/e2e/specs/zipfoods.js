@@ -6,7 +6,7 @@ describe('ZipFoods', () => {
 
     let product = {
       name: 'Driscoll’s Strawberries',
-      id: '1'
+      slug: 'driscolls-strawberries'
     }
 
     it('shows all the products', () => {
@@ -20,7 +20,7 @@ describe('ZipFoods', () => {
     })
 
     it('interacts with cart', () => {
-      cy.visit('/products/' + product.id);
+      cy.visit('/product/' + product.slug);
       cy.get('[data-test="add-to-cart-button"]').click();
       cy.contains('[data-test="cart-count"]', 1);
       cy.visit('/cart');
@@ -28,5 +28,11 @@ describe('ZipFoods', () => {
       cy.get('[data-test="remove-from-cart-button"]').click();
       cy.contains('[data-test="cart-count"]', 0);
       cy.contains('No items');
+  })
+
+  it('shows the categories page', () => {
+    cy.visit('/categories');
+    cy.contains('[data-test="category-name"]', 'baking');
+    cy.get('[data-test="category-name"]').should('have.length', 8);
   })
 })

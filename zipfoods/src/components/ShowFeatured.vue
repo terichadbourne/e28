@@ -14,10 +14,9 @@ export default {
   props: ['category'],
   computed: {
     featuredProducts: function() {
-      function isMatch(product) {
-        return product.categories.includes(this);
-      }
-      return this.products.filter(isMatch, this.category);
+      return _.filter(this.products, product => {
+        return product.categories.includes(this.category)
+      })
     },
     products: function() {
       return this.$store.state.products;

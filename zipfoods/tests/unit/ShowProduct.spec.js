@@ -5,7 +5,7 @@ import ShowProduct from '@/components/ShowProduct.vue'
 describe('ShowProduct.vue', () => {
   it('shows a product', () => {
     let product =     {
-            id: 2,
+            slug: 'nestle-toll-house-cookie-dough',
             name: 'Nestle Toll House Cookie Dough',
             description:
                 'Get the classic taste that America loves in a ready to bake dough. Full of our famous morsels, these cookies deliver the chocolate flavor you’ve come to expect from Nestle Toll House.',
