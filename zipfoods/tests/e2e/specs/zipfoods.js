@@ -13,8 +13,8 @@ describe('ZipFoods', () => {
         cy.visit('/products')
         cy.contains('h2', 'Products')
         cy.contains('[data-test="product-name"]', product.name)
-        cy.get('[data-test="product-name"]').should('have.length', 10)
-        cy.get('[data-test="product-name"]').first().click()
+        cy.get('[data-test="product-name"]').should('have.length.greaterThan', 9)
+        cy.contains('[data-test="product-name"]', product.name).click()
         //confirm product page is showing the product
         cy.contains('[data-test="product-name"]', product.name)
     })
@@ -33,6 +33,6 @@ describe('ZipFoods', () => {
   it('shows the categories page', () => {
     cy.visit('/categories');
     cy.contains('[data-test="category-name"]', 'baking');
-    cy.get('[data-test="category-name"]').should('have.length', 8);
+    cy.get('[data-test="category-name"]').should('have.length.greaterThan', 7);
   })
 })
