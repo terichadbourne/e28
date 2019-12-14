@@ -78,7 +78,7 @@ export default class Favorites {
   }
 
   /**
-   * Get an item from items via typpe and id
+   * Get an item from items via type and id
    * Returns null if it doesn't exist
    */
   getItem(type, id) {

@@ -1,6 +1,7 @@
 <template>
   <div id='app'>
     <h1>Rants & Raves</h1>
+    <p>How's the company doing? Check out your colleagues' top rants and raves, submit your own, and favorite those you agree with. Your feedback will help us improve the way we work!</p>
     <nav>
       <ul>
         <li v-for='link in links' :key='link'>

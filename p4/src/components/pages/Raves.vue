@@ -2,7 +2,7 @@
   <div>
     <h2>Raves</h2>
     <!-- <p>sharedFavorites:
-    {{sharedState.favorites}}</p>-->
+    {{ sharedState.favorites }}</p>-->
     <div>
       <input type='radio' id='all' :value='false' v-model='filtered' />
       <label for='all'>All</label>
@@ -56,6 +56,7 @@ export default {
   },
   methods: {
     toggleFilter: function() {
+      // toggle display of all items versus just favorited items when radio button is clicked
       this.$forceUpdate();
       if (this.filtered) {
         this.filtered = false;

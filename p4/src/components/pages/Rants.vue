@@ -2,7 +2,7 @@
   <div>
     <h2>Rants</h2>
       <!-- <p>sharedFavorites:
-        {{sharedState.favorites}}</p> -->
+        {{ sharedState.favorites }}</p> -->
     <div>
       <input type="radio" id="all" :value="false" v-model="filtered" />
       <label for="all">All</label>
@@ -11,7 +11,7 @@
       <label for="favorites">Favorites</label>
     </div>
     <div v-if="people && rantingPeople" :class="{ filtered: filtered }">
-      <router-link :to='{ name: "rant", params: {"id" : person.id }}' v-for='person in rantingPeople' :key='person.id' :person='person' >
+      <router-link :to='{ name: "rant", params: {"id" : person.id } }' v-for='person in rantingPeople' :key='person.id' :person='person' >
         <FeedbackCard :type="type" :detailed="false" :message="person.rant" :name="person.name" :id="person.id" v-on:update-favorites="updateFavorites"/>
       </router-link>
     </div>
@@ -47,6 +47,7 @@ export default {
   },
   methods: {
     toggleFilter: function (){
+      // toggle display of all items versus just favorited items when radio button is clicked
       this.$forceUpdate()
        if (this.filtered) {
          this.filtered = false

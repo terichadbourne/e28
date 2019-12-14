@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2>Rant {{id}}</h2>
+    <h2>Rant {{ id }}</h2>
     <div v-if='person && person.rant.length > 0'>
       <FeedbackCard
         :type='type'
