@@ -1,8 +1,6 @@
 <template>
   <div>
-    <h2>Raves</h2>
-    <!-- <p>sharedFavorites:
-    {{ sharedState.favorites }}</p>-->
+    <h2>{{ pageTitle }}</h2>
     <div>
       <input type='radio' id='all' :value='false' v-model='filtered' />
       <label for='all'>All</label>
@@ -10,17 +8,17 @@
       <input type='radio' id='favorites' :value='true' v-model='filtered' />
       <label for='favorites'>Favorites</label>
     </div>
-    <div v-if='people && ravingPeople' :class='{ filtered: filtered }'>
+    <div v-if='people && filteredPeople' :class='{ filtered: filtered }'>
       <router-link
-        :to='{ name: "rave", params: {"id" : person.id }}'
-        v-for='person in ravingPeople'
+        :to='{ name: type, params: {"id" : person.id } }'
+        v-for='person in filteredPeople'
         :key='person.id'
         :person='person'
       >
         <FeedbackCard
           :type='type'
           :detailed='false'
-          :message='person.rave'
+          :message='person[type]'
           :name='person.name'
           :id='person.id'
           v-on:update-favorites='updateFavorites'
@@ -32,26 +30,30 @@
 </template>
 
 <script>
-import * as app from './../../app.js';
-import FeedbackCard from './../FeedbackCard.vue';
+import * as app from './../app.js';
+import FeedbackCard from './FeedbackCard.vue';
 
 export default {
-  name: 'Raves',
+  name: 'FeedbackList',
   components: {
     FeedbackCard
   },
+  props: ['type'],
   data: function() {
     return {
       people: null,
-      type: 'rave',
       sharedState: app.store,
       filtered: false,
       favorites: null
     };
   },
   computed: {
-    ravingPeople: function() {
-      return this.people.filter(people => people.rave.length > 0);
+    filteredPeople: function() {
+      // return list of people with rants or raves as defined by type property
+      return this.people.filter(people => people[this.type].length > 0);
+    },
+    pageTitle: function() {
+      return this.type.charAt(0).toUpperCase() + this.type.slice(1) + 's';
     }
   },
   methods: {
@@ -75,6 +77,9 @@ export default {
       this.people = response.data;
       this.updateFavorites();
     });
+  },
+  beforeUpdate() {
+    this.updateFavorites();
   }
 };
 </script>
