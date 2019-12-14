@@ -30,8 +30,8 @@
 </template>
 
 <script>
-import * as app from './../app.js';
-import FeedbackCard from './FeedbackCard.vue';
+import * as app from './../../app.js';
+import FeedbackCard from './../FeedbackCard.vue';
 
 export default {
   name: 'FeedbackList',

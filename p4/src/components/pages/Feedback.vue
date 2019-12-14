@@ -1,17 +1,17 @@
 <template>
   <div>
-    <h2>Rant {{ id }}</h2>
-    <div v-if='person && person.rant.length > 0'>
+    <h2>{{ pageTitle }}</h2>
+    <div v-if='person && person[type].length > 0'>
       <FeedbackCard
         :type='type'
         :detailed='true'
-        :message='person.rant'
+        :message='person[type]'
         :name='person.name'
         :id='person.id'
       />
     </div>
     <div v-else>
-      <p>Oops! There's no rant with that ID.</p>
+      <p>Oops! There's no {{type}} with that ID.</p>
     </div>
   </div>
 </template>
@@ -21,16 +21,22 @@ import * as app from './../../app.js';
 import FeedbackCard from './../FeedbackCard.vue';
 
 export default {
-  name: 'Rant',
-  props: ['id'],
+  name: 'Feedback',
+  props: ['id', 'type'],
   components: {
     FeedbackCard
   },
   data: function() {
     return {
-      person: null,
-      type: 'rant'
+      person: null
     };
+  },
+  computed: {
+    pageTitle: function() {
+      return (
+        this.type.charAt(0).toUpperCase() + this.type.slice(1) + ' ' + this.id
+      );
+    }
   },
   mounted() {
     app.axios.get(app.config.api + 'people/' + this.id).then(response => {
