@@ -29,7 +29,7 @@ export default {
         : 'Add to favorites';
     },
     toggleFavorite() {
-      console.log('in toggleFavorite in FeedbackCard.vue');
+      this.faves = new app.Faves();
       if (this.isFavorite) {
         this.faves.remove(this.type, this.id);
       } else {

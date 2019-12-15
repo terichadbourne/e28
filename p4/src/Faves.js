@@ -42,7 +42,7 @@ export default class Faves {
 
 
   /**
-   * Update favorites in localstorage and app.store  // CHANGE
+   * Update favorites in localstorage 
    */
   update() {
     localStorage.setItem('favorites', JSON.stringify(this.items))
@@ -53,14 +53,13 @@ export default class Faves {
    */
   add(type, id) {
     let key = this.getKey(type)
-    console.log(`${key} before adding ${id}:`, this.items[key])
     // First see if item is already present
     let itemExists = this.getItem(type, id)
 
     if (!itemExists) {
       this.items[key].push(id)
     }
-    console.log(`${key} after adding ${id}:`, this.items[key])
+
     this.update();
   }
 
@@ -69,15 +68,14 @@ export default class Faves {
    */
   remove(type, id) {
     let key = this.getKey(type)
-    console.log(`${key} before removing ${id}:`, this.items[key])
     let item = this.getItem(type, id);
 
-    let itemIndex = this.items[key].indexOf(item);
-
     if (item) {
-      this.items[key].splice(itemIndex, 1);
-      console.log(`${key} after removing ${id}:`, this.items[key])
-      this.update();
+      let itemIndex = this.items[key].indexOf(id);
+      if (itemIndex > -1) {
+        this.items[key].splice(itemIndex, 1);
+        this.update();
+      }
     }
   }
 
