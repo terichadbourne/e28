@@ -26,7 +26,15 @@
         />
       </router-link>
     </div>
-    <div v-else>Oops! No {{ type }}s have been favorited yet.</div>
+    <div v-else>
+      <p>
+        Oops! Nothing to see here.
+        <span
+          class='fake-link'
+          v-on:click='toggleFilter'
+        >View all {{ type }}s</span> to start marking your favorites.
+      </p>
+    </div>
   </div>
 </template>
 

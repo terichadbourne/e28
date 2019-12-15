@@ -112,6 +112,12 @@ header {
   border: 2px #005e8f solid;
 }
 
+.fake-link {
+  text-decoration: underline;
+  cursor: pointer;
+  color: $blue;
+}
+
 nav ul {
     list-style-type: none;
 
