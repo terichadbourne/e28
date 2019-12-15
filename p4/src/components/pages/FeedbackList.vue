@@ -1,6 +1,7 @@
 <template>
   <div>
     <h2>{{ pageTitle }}</h2>
+    <p>relevant favorites index: {{favoritesIndex}}</p>
 
     <div>
       <input type='radio' id='all' :value='false' v-model='filtered' />
@@ -9,7 +10,25 @@
       <input type='radio' id='favorites' :value='true' v-model='filtered' />
       <label for='favorites'>Favorites</label>
     </div>
+    <div v-if='people && filteredFavorites'>
+      <h2>new favorites list w/o filtered class</h2>
+      <router-link
+        :to='{ name: type, params: {"id" : person.id } }'
+        v-for='person in filteredFavorites'
+        :key='person.id'
+        :person='person'
+      >
+        <FeedbackCard
+          :type='type'
+          :detailed='false'
+          :message='person[type]'
+          :name='person.name'
+          :id='person.id'
+        />
+      </router-link>
+    </div>
     <div v-if='people && filteredPeople' :class='{ filtered: filtered }'>
+      <h2>old list cheating with classes</h2>
       <router-link
         :to='{ name: type, params: {"id" : person.id } }'
         v-for='person in filteredPeople'
@@ -49,13 +68,27 @@ export default {
   computed: {
     filteredPeople: function() {
       // return list of people with rants or raves as defined by type property
-      return this.people.filter(people => people[this.type].length > 0);
+      return this.people.filter(person => person[this.type].length > 0);
     },
     pageTitle: function() {
       return this.type.charAt(0).toUpperCase() + this.type.slice(1) + 's';
     },
     favoritesIndex: function() {
-      return this.$store.state.favoritesIndex;
+      return this.$store.state.favoritesIndex[this.favoritesKey];
+    },
+    favoritesKey: function() {
+      console.log(this.type);
+      if (this.type === 'rant') {
+        return 'favoriteRants';
+      } else if (this.type === 'rave') {
+        return 'favoriteRaves';
+      } else {
+        console.log('something else');
+        return null;
+      }
+    },
+    filteredFavorites: function() {
+      return this.filteredPeople.filter(person => this.favoritesIndex.includes(person.id));
     }
   },
   methods: {
