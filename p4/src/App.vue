@@ -9,9 +9,6 @@
         </li>
       </ul>
     </nav>
-    <h2>-----TEST DISPLAY FROM VUEX------</h2>
-    <p>in app.vue, favorites from Vuex: {{ favorites }}</p>
-    <h2>-----------------------------</h2>
 
     <router-view></router-view>
   </div>
@@ -30,7 +27,7 @@ export default {
     };
   },
   computed: {
-    favorites: function() {
+    favoritesIndex: function() {
       return this.$store.state.favoritesIndex;
     }
   },

@@ -2,7 +2,6 @@
   <div>
     <h2>{{ pageTitle }}</h2>
 
-    <p>Favorites in feedback list if not computed there: {{ favorites }}</p>
     <div>
       <input type='radio' id='all' :value='false' v-model='filtered' />
       <label for='all'>All</label>
@@ -55,7 +54,7 @@ export default {
     pageTitle: function() {
       return this.type.charAt(0).toUpperCase() + this.type.slice(1) + 's';
     },
-    favorites: function() {
+    favoritesIndex: function() {
       return this.$store.state.favoritesIndex;
     }
   },
