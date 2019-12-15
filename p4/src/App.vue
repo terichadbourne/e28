@@ -31,12 +31,12 @@ export default {
   },
   computed: {
     favorites: function() {
-      return this.$store.state.favorites;
+      return this.$store.state.favoritesIndex;
     }
   },
   mounted() {
     this.faves = new app.Faves();
-    this.$store.commit('setFavorites', this.faves.getItems());
+    this.$store.commit('setFavoritesIndex', this.faves.getItems());
   }
 };
 </script>

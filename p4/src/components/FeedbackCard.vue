@@ -36,7 +36,7 @@ export default {
         this.faves.add(this.type, this.id);
       }
       this.updateFavoriteUI();
-      this.$store.commit('setFavorites', this.faves.getItems());
+      this.$store.commit('setFavoritesIndex', this.faves.getItems());
     }
   },
   mounted() {

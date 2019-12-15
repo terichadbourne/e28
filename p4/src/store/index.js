@@ -5,15 +5,15 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
     state: {
-        favorites: {
+        favoritesIndex: {
             "favoriteRants": [],
             "favoriteRaves": []
         }
     },
     mutations: {
-        setFavorites(state, payload) {
-            state.favorites = payload;
-            console.log('just ran setFavorites mutation in store/index.js')
+        setFavoritesIndex(state, payload) {
+            state.favoritesIndex = payload;
+            console.log('just ran setFavoritesIndex mutation in store/index.js')
         }
         // ,
         // updateFavorites(state, payload) {
