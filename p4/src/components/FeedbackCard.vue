@@ -18,30 +18,30 @@ export default {
     return {
       isFavorite: null,
       ariaLabel: null,
-      favorites: null
+      faves: null
     };
   },
   methods: {
-    updateFavoriteState() {
-      this.isFavorite = this.favorites.getItem(this.type, this.id);
+    updateFavoriteUI() {
+      this.isFavorite = this.faves.getItem(this.type, this.id);
       this.ariaLabel = this.isFavorite
         ? 'Remove from favorites'
         : 'Add to favorites';
-      app.store.faves = this.favorites.getItems();
-      this.$emit('update-favorites', event);
     },
     toggleFavorite() {
+      console.log('in toggleFavorite in FeedbackCard.vue');
       if (this.isFavorite) {
-        this.favorites.remove(this.type, this.id);
+        this.faves.remove(this.type, this.id);
       } else {
-        this.favorites.add(this.type, this.id);
+        this.faves.add(this.type, this.id);
       }
-      this.updateFavoriteState();
+      this.updateFavoriteUI();
+      this.$store.commit('setFavorites', this.faves.getItems());
     }
   },
   mounted() {
-    this.favorites = new app.Favorites();
-    this.updateFavoriteState();
+    this.faves = new app.Faves();
+    this.updateFavoriteUI();
   }
 };
 </script>

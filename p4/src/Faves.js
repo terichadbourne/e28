@@ -1,6 +1,8 @@
+/* eslint-disable no-unused-vars */
 import * as app from './app.js';
+/* eslint-enable no-unused-vars */
 
-export default class Favorites {
+export default class Faves {
 
   /**
    *
@@ -40,11 +42,10 @@ export default class Favorites {
 
 
   /**
-   * Update favorites in localstorage and app.store
+   * Update favorites in localstorage and app.store  // CHANGE
    */
   update() {
     localStorage.setItem('favorites', JSON.stringify(this.items))
-    app.store.faves = this.getItems();
   }
 
   /**
@@ -52,13 +53,14 @@ export default class Favorites {
    */
   add(type, id) {
     let key = this.getKey(type)
-    // First see if product is already present
-    let item = this.getItem(type, id)
+    console.log(`${key} before adding ${id}:`, this.items[key])
+    // First see if item is already present
+    let itemExists = this.getItem(type, id)
 
-    if (!item) {
+    if (!itemExists) {
       this.items[key].push(id)
     }
-
+    console.log(`${key} after adding ${id}:`, this.items[key])
     this.update();
   }
 
@@ -67,12 +69,14 @@ export default class Favorites {
    */
   remove(type, id) {
     let key = this.getKey(type)
+    console.log(`${key} before removing ${id}:`, this.items[key])
     let item = this.getItem(type, id);
 
     let itemIndex = this.items[key].indexOf(item);
 
     if (item) {
       this.items[key].splice(itemIndex, 1);
+      console.log(`${key} after removing ${id}:`, this.items[key])
       this.update();
     }
   }

@@ -9,21 +9,35 @@
         </li>
       </ul>
     </nav>
+    <h2>-----TEST DISPLAY FROM VUEX------</h2>
+    <p>in app.vue, favorites from Vuex: {{ favorites }}</p>
+    <h2>-----------------------------</h2>
 
     <router-view></router-view>
   </div>
 </template>
 
 <script>
+import * as app from './app.js';
+
 export default {
   name: 'app',
   components: {},
   data: function() {
     return {
-      links: ['people', 'raves', 'rants']
+      links: ['people', 'raves', 'rants'],
+      faves: null
     };
   },
-  mounted() {}
+  computed: {
+    favorites: function() {
+      return this.$store.state.favorites;
+    }
+  },
+  mounted() {
+    this.faves = new app.Faves();
+    this.$store.commit('setFavorites', this.faves.getItems());
+  }
 };
 </script>
 

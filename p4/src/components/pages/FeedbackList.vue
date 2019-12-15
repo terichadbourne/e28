@@ -21,7 +21,6 @@
           :message='person[type]'
           :name='person.name'
           :id='person.id'
-          v-on:update-favorites='updateFavorites'
         />
       </router-link>
     </div>
@@ -42,9 +41,8 @@ export default {
   data: function() {
     return {
       people: null,
-      sharedState: app.store,
       filtered: false,
-      favorites: null
+      faves: null
     };
   },
   computed: {
@@ -54,6 +52,9 @@ export default {
     },
     pageTitle: function() {
       return this.type.charAt(0).toUpperCase() + this.type.slice(1) + 's';
+    },
+    favorites: function() {
+      return this.$store.state.favorites;
     }
   },
   methods: {
@@ -65,21 +66,13 @@ export default {
       } else {
         this.filtered = true;
       }
-    },
-    updateFavorites: function() {
-      app.store.faves = this.favorites.getItems();
-      this.$forceUpdate();
     }
   },
   mounted() {
-    this.favorites = new app.Favorites();
+    // this.faves = new app.Faves();
     app.axios.get(app.config.api + 'people').then(response => {
       this.people = response.data;
-      this.updateFavorites();
     });
-  },
-  beforeUpdate() {
-    this.updateFavorites();
   }
 };
 </script>
