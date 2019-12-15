@@ -1,8 +1,6 @@
 <template>
   <div>
     <h2>{{ pageTitle }}</h2>
-    <p>relevant favorites index: {{favoritesIndex}}</p>
-
     <div>
       <input type='radio' id='all' :value='false' v-model='filtered' />
       <label for='all'>All</label>
@@ -10,11 +8,12 @@
       <input type='radio' id='favorites' :value='true' v-model='filtered' />
       <label for='favorites'>Favorites</label>
     </div>
-    <div v-if='people && filteredFavorites'>
-      <h2>new favorites list w/o filtered class</h2>
+    <div v-if='!people'>Loading records...</div>
+    <div v-else-if='people && !filteredPeople'>No ${type}s in database.</div>
+    <div v-else-if='!filtered || (filtered && (favoritesIndex[favoritesKey].length > 0))'>
       <router-link
         :to='{ name: type, params: {"id" : person.id } }'
-        v-for='person in filteredFavorites'
+        v-for='person in filteredList'
         :key='person.id'
         :person='person'
       >
@@ -27,24 +26,7 @@
         />
       </router-link>
     </div>
-    <div v-if='people && filteredPeople' :class='{ filtered: filtered }'>
-      <h2>old list cheating with classes</h2>
-      <router-link
-        :to='{ name: type, params: {"id" : person.id } }'
-        v-for='person in filteredPeople'
-        :key='person.id'
-        :person='person'
-      >
-        <FeedbackCard
-          :type='type'
-          :detailed='false'
-          :message='person[type]'
-          :name='person.name'
-          :id='person.id'
-        />
-      </router-link>
-    </div>
-    <div v-else>Loading records...</div>
+    <div v-else>Oops! No {{ type }}s have been favorited yet.</div>
   </div>
 </template>
 
@@ -67,28 +49,32 @@ export default {
   },
   computed: {
     filteredPeople: function() {
-      // return list of people with rants or raves as defined by type property
+      // return records for feedback of correct type
       return this.people.filter(person => person[this.type].length > 0);
+    },
+    filteredFavorites: function() {
+      // return records for feedback of correct type that are marked as favorites
+      return this.filteredPeople.filter(person =>
+        this.favoritesIndex[this.favoritesKey].includes(person.id)
+      );
+    },
+    filteredList: function() {
+      // return appropriate records based on whether the list is filtered via radio button
+      return this.filtered ? this.filteredFavorites : this.filteredPeople;
     },
     pageTitle: function() {
       return this.type.charAt(0).toUpperCase() + this.type.slice(1) + 's';
     },
     favoritesIndex: function() {
-      return this.$store.state.favoritesIndex[this.favoritesKey];
+      return this.$store.state.favoritesIndex;
     },
     favoritesKey: function() {
-      console.log(this.type);
-      if (this.type === 'rant') {
-        return 'favoriteRants';
-      } else if (this.type === 'rave') {
-        return 'favoriteRaves';
-      } else {
-        console.log('something else');
-        return null;
-      }
-    },
-    filteredFavorites: function() {
-      return this.filteredPeople.filter(person => this.favoritesIndex.includes(person.id));
+      return (
+        'favorite' +
+        this.type.charAt(0).toUpperCase() +
+        this.type.slice(1) +
+        's'
+      );
     }
   },
   methods: {

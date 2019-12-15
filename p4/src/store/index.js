@@ -13,7 +13,6 @@ export default new Vuex.Store({
     mutations: {
         setFavoritesIndex(state, payload) {
             state.favoritesIndex = payload;
-            console.log('just ran setFavoritesIndex mutation in store/index.js')
         }
         // ,
         // updateFavorites(state, payload) {

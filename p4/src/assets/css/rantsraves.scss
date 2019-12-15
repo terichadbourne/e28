@@ -80,10 +80,6 @@ header {
   padding: 10px;
 }
 
-div.filtered .card:not(.favorite) {
-  display: none;
-}
-
 .person {
   background-color: $aqua;
   color: $navy;
@@ -115,7 +111,6 @@ div.filtered .card:not(.favorite) {
   color: #005e8f;
   border: 2px #005e8f solid;
 }
-
 
 nav ul {
     list-style-type: none;
