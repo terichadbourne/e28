@@ -6,11 +6,17 @@
         <h2>{{ person.name }}</h2>
         <p v-if='person.rave'>
           ❤️
-          <router-link :to='{ name: "rave", params: {"id" : person.id }}'>{{ person.rave }}</router-link>
+          <router-link
+            data-test='rave-link'
+            :to='{ name: "rave", params: {"id" : person.id }}'
+          >{{ person.rave }}</router-link>
         </p>
         <p v-if='person.rant'>
           🔥
-          <router-link :to='{ name: "rant", params: {"id" : person.id }}'>{{ person.rant }}</router-link>
+          <router-link
+            data-test='rant-link'
+            :to='{ name: "rant", params: {"id" : person.id }}'
+          >{{ person.rant }}</router-link>
         </p>
       </div>
     </div>
