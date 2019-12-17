@@ -2,10 +2,10 @@
   <div>
     <h2>{{ pageTitle }}</h2>
     <div>
-      <input type='radio' id='all' :value='false' v-model='filtered' />
+      <input type='radio' id='all' :value='false' name='filteredView' v-model='filtered' />
       <label for='all'>All</label>
 
-      <input type='radio' id='favorites' :value='true' v-model='filtered' />
+      <input type='radio' id='favorites' :value='true' name='filteredView' v-model='filtered' />
       <label for='favorites'>Favorites</label>
     </div>
     <div v-if='!people'>Loading records...</div>
@@ -26,7 +26,8 @@
         />
       </router-link>
     </div>
-    <div v-else>
+
+    <div class='form-error' v-if='$v.filteredView.noFilteredFavorites'>
       <p>
         Oops! Nothing to see here.
         <span
@@ -101,6 +102,15 @@ export default {
     app.axios.get(app.config.api + 'people').then(response => {
       this.people = response.data;
     });
+  },
+  validations: {
+    filteredView: {
+      noFilteredFavorites() {
+        return (
+          this.filtered && !(this.favoritesIndex[this.favoritesKey].length > 0)
+        );
+      }
+    }
   }
 };
 </script>

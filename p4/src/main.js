@@ -5,8 +5,10 @@ import People from './components/pages/People.vue';
 import FeedbackList from './components/pages/FeedbackList.vue';
 import Feedback from './components/pages/Feedback.vue';
 import PageNotFound from './components/pages/PageNotFound.vue';
-
+import Vuelidate from 'vuelidate'
 import store from './store'
+
+Vue.use(Vuelidate)
 
 Vue.use(VueRouter)
 Vue.config.productionTip = false
