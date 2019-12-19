@@ -39,9 +39,12 @@ export default {
     }
   },
   mounted() {
-    app.axios.get(app.config.api + 'people/' + this.id).then(response => {
-      this.person = response.data;
-    });
+    let dbKey = this.id - 1;
+    app.axios
+      .get(app.config.api + 'people/' + dbKey + '.json')
+      .then(response => {
+        this.person = response.data;
+      });
   }
 };
 </script>
