@@ -44,7 +44,7 @@ describe('test all the things!', () => {
     "rant": "Bureacracy is painful. :("
   }
 
-  it('visits the homepage, sees all nav links and people records', () => {
+  it('visits the people page (homepage), sees all nav links and people records', () => {
     // visit homepage (people component)
     cy.visit('/')
     cy.contains('h2', 'People')
