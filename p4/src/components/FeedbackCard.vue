@@ -5,8 +5,8 @@
       class='card'
       :class='{ favorite: isFavorite, rant: type=="rant", rave: type=="rave" }'
     >
-      <h2>{{message}}</h2>
-      <p v-if='detailed'>- {{name}}</p>
+      <h2>{{ message }}</h2>
+      <p v-if='detailed'>- {{ name }}</p>
       <button
         data-test='favorite-button'
         class='favorite-icon'

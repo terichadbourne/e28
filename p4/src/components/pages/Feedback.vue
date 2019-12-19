@@ -11,7 +11,7 @@
       />
     </div>
     <div v-else>
-      <p>Oops! There's no {{type}} with that ID.</p>
+      <p>Oops! There's no {{ type }} with that ID.</p>
     </div>
   </div>
 </template>
