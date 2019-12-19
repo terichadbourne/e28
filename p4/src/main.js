@@ -4,6 +4,7 @@ import VueRouter from 'vue-router'
 import People from './components/pages/People.vue';
 import FeedbackList from './components/pages/FeedbackList.vue';
 import Feedback from './components/pages/Feedback.vue';
+import CreatePerson from './components/pages/CreatePerson.vue';
 import PageNotFound from './components/pages/PageNotFound.vue';
 import Vuelidate from 'vuelidate'
 import store from './store'
@@ -18,7 +19,7 @@ const routes = [
   { path: '/rants', name: 'rants', component: FeedbackList, props: { type: 'rant' } },
   { path: '/raves', name: 'raves', component: FeedbackList, props: { type: 'rave' } },
   { path: '/raves/:id', name: 'rave', component: Feedback, props: (route) => ({ id: route.params.id, type: 'rave' }) },
-  { path: '/rants/:id', name: 'rant', component: Feedback, props: (route) => ({ id: route.params.id, type: 'rant' }) },
+  { path: '/create', name: 'create', component: CreatePerson },
   { path: '*', component: PageNotFound }
 ]
 

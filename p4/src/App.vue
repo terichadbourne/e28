@@ -22,7 +22,7 @@ export default {
   components: {},
   data: function() {
     return {
-      links: ['people', 'raves', 'rants'],
+      links: ['people', 'raves', 'rants', 'create'],
       faves: null
     };
   },
