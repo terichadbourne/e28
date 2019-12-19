@@ -115,7 +115,7 @@ export default {
   mounted() {
     // this.faves = new app.Faves();
     app.axios.get(app.config.api + 'people.json').then(response => {
-      this.people = response.data;
+      this.people = response.data.slice(1);
     });
   },
   validations: {

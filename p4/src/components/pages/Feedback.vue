@@ -39,9 +39,9 @@ export default {
     }
   },
   mounted() {
-    let dbKey = this.id - 1;
+    //let dbKey = this.id - 1;
     app.axios
-      .get(app.config.api + 'people/' + dbKey + '.json')
+      .get(app.config.api + 'people/' + this.id + '.json')
       .then(response => {
         this.person = response.data;
       });
