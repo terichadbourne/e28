@@ -1,5 +1,5 @@
 import { expect } from 'chai'
-import { shallowMount } from '@vue/test-utils'
+import { shallowMount, RouterLinkStub } from '@vue/test-utils'
 import People from '@/components/pages/People.vue'
 
 describe('People.vue', () => {
@@ -21,41 +21,37 @@ describe('People.vue', () => {
       }
     ]
 
-    // Mount our component
+    // Mount component
     const wrapper = shallowMount(People, {
-      propsData: { people }
-
-      // THIS DIDN'T HELP (REPLACING ABOVE)
-      // computed: {
-      //   people: function () {
-      //     return [people]
-      //   }
-      // }
-
+      stubs: {
+        RouterLink: RouterLinkStub
+      }
     })
 
-    // Assert our results
-
-    // THIS DIDN'T HELP (REPLACING SETTIMEOUT BELOW)
-    // await new Promise(resolve => setTimeout(resolve));
+    // Overwrite data option people in component with people object above (avoiding Axios)
+    wrapper.setData({ people: people })
 
     // giving it time to figure out what "people" is so it doesn't display loading message
-    setTimeout(function () {
-      expect(wrapper.text()).to.include('People')
-      people.forEach((person, index) => {
-        expect(wrapper.text()).to.include(people[0].name)
-        if (people[index].hasOwnProperty('rave')) {
-          let foundRaveLink = wrapper.find('[data-test="rave-link"]').exists();
-          expect(foundRaveLink).to.equal(true);
-          expect(foundRaveLink.text()).to.include(people[index].rave)
-        }
-        if (people[index].hasOwnProperty('rant')) {
-          let foundRantLink = wrapper.find('[data-test="rant-link"]').exists();
-          expect(foundRantLink).to.equal(true);
-          expect(foundRantLink.text()).to.include(people[index].rant)
-        }
-      })
-    }, 5000);
+    expect(wrapper.text()).to.include('People')
+    expect(wrapper.text()).to.include(people[0].name)
+    people.forEach((person, index) => {
+      if (people[index].hasOwnProperty('rave')) {
+        // get first ravec link with the right ID 
+        let raveLink = wrapper.find('[data-test="rave-link-' + people[index].id + '"]');
+        // confirm link exists
+        expect(raveLink.exists()).to.equal(true);
+        // confirm link contains the right text
+        expect(raveLink.text()).to.include(people[index].rave)
+      }
+      if (people[index].hasOwnProperty('rant')) {
+        // get first rant link with the right ID 
+        let rantLink = wrapper.find('[data-test="rant-link-' + people[index].id + '"]');
+        // confirm link exists
+        expect(rantLink.exists()).to.equal(true);
+        // confirm link contains the right text
+        expect(rantLink.text()).to.include(people[index].rant)
+      }
+    })
 
   })
 })
