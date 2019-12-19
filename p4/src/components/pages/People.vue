@@ -2,7 +2,7 @@
   <div id='products'>
     <h2>People</h2>
     <div v-if='people'>
-      <div class='card person' v-for='person in people' :key='person.id' :person='person'>
+      <div data-test='person-card' class='card person' v-for='person in people' :key='person.id' :person='person'>
         <h2>{{ person.name }}</h2>
         <p v-if='person.rave'>
           ❤️
