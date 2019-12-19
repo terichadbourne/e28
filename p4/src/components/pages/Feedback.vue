@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import * as app from './../../app.js';
+// import * as app from './../../app.js';
 import FeedbackCard from './../FeedbackCard.vue';
 
 export default {
@@ -26,26 +26,28 @@ export default {
   components: {
     FeedbackCard
   },
-  data: function() {
-    return {
-      person: null
-    };
-  },
+  // data: function() {
+  //   return {
+  //     person: null
+  //   };
+  // },
   computed: {
     pageTitle: function() {
       return (
         this.type.charAt(0).toUpperCase() + this.type.slice(1) + ' ' + this.id
       );
+    },
+    person() {
+      return this.$store.getters.getPersonById(this.id);
     }
-  },
-  mounted() {
-    //let dbKey = this.id - 1;
-    app.axios
-      .get(app.config.api + 'people/' + this.id + '.json')
-      .then(response => {
-        this.person = response.data;
-      });
   }
+  // mounted() {
+  //   app.axios
+  //     .get(app.config.api + 'people/' + this.id + '.json')
+  //     .then(response => {
+  //       this.person = response.data;
+  //     });
+  // }
 };
 </script>
 

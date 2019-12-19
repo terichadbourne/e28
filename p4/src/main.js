@@ -19,6 +19,7 @@ const routes = [
   { path: '/rants', name: 'rants', component: FeedbackList, props: { type: 'rant' } },
   { path: '/raves', name: 'raves', component: FeedbackList, props: { type: 'rave' } },
   { path: '/raves/:id', name: 'rave', component: Feedback, props: (route) => ({ id: route.params.id, type: 'rave' }) },
+  { path: '/raves/:id', name: 'rant', component: Feedback, props: (route) => ({ id: route.params.id, type: 'rant' }) },
   { path: '/create', name: 'create', component: CreatePerson },
   { path: '*', component: PageNotFound }
 ]

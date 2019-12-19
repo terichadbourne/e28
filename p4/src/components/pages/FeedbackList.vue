@@ -55,7 +55,7 @@
 </template>
 
 <script>
-import * as app from './../../app.js';
+// import * as app from './../../app.js';
 import FeedbackCard from './../FeedbackCard.vue';
 
 export default {
@@ -66,12 +66,14 @@ export default {
   props: ['type'],
   data: function() {
     return {
-      people: null,
       filtered: false,
       faves: null
     };
   },
   computed: {
+    people: function() {
+      return this.$store.state.people;
+    },
     filteredPeople: function() {
       // return records for feedback of correct type
       return this.people.filter(person => person[this.type].length > 0);
@@ -111,12 +113,6 @@ export default {
         this.filtered = true;
       }
     }
-  },
-  mounted() {
-    // this.faves = new app.Faves();
-    app.axios.get(app.config.api + 'people.json').then(response => {
-      this.people = response.data.slice(1);
-    });
   },
   validations: {
     filteredView: {

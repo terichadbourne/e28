@@ -34,6 +34,7 @@ export default {
   mounted() {
     this.faves = new app.Faves();
     this.$store.commit('setFavoritesIndex', this.faves.getItems());
+    this.$store.dispatch('setPeople');
   }
 };
 </script>

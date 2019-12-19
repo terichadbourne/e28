@@ -31,20 +31,15 @@
 </template>
 
 <script>
-import * as app from './../../app.js';
+// import * as app from './../../app.js';
 
 export default {
   name: 'People',
   components: {},
-  data: function() {
-    return {
-      people: null
-    };
-  },
-  mounted() {
-    app.axios.get(app.config.api + 'people.json').then(response => {
-      this.people = response.data.slice(1);
-    });
+  computed: {
+    people: function() {
+      return this.$store.state.people;
+    }
   }
 };
 </script>
