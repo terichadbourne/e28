@@ -1,9 +1,18 @@
 <template>
   <div>
-    <div class='card' :class='{ favorite: isFavorite, rant: type=="rant", rave: type=="rave" }'>
+    <div
+      :data-test='"feedback-card-" + type'
+      class='card'
+      :class='{ favorite: isFavorite, rant: type=="rant", rave: type=="rave" }'
+    >
       <h2>{{message}}</h2>
       <p v-if='detailed'>- {{name}}</p>
-      <button class='favorite-icon' v-on:click.prevent='toggleFavorite' :aria-label='ariaLabel'>❤</button>
+      <button
+        data-test='favorite-button'
+        class='favorite-icon'
+        v-on:click.prevent='toggleFavorite'
+        :aria-label='ariaLabel'
+      >❤</button>
     </div>
   </div>
 </template>

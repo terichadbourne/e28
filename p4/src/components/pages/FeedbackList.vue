@@ -2,10 +2,24 @@
   <div>
     <h2>{{ pageTitle }}</h2>
     <div>
-      <input type='radio' id='all' :value='false' name='filteredView' v-model='filtered' />
+      <input
+        data-test='radio-all'
+        type='radio'
+        id='all'
+        :value='false'
+        name='filteredView'
+        v-model='filtered'
+      />
       <label for='all'>All</label>
 
-      <input type='radio' id='favorites' :value='true' name='filteredView' v-model='filtered' />
+      <input
+        data-test='radio-favorites'
+        type='radio'
+        id='favorites'
+        :value='true'
+        name='filteredView'
+        v-model='filtered'
+      />
       <label for='favorites'>Favorites</label>
     </div>
     <div v-if='!people'>Loading records...</div>
@@ -27,10 +41,11 @@
       </router-link>
     </div>
 
-    <div class='form-error' v-if='$v.filteredView.noFilteredFavorites'>
+    <div data-test='no-favorites' class='form-error' v-if='$v.filteredView.noFilteredFavorites'>
       <p>
         Oops! Nothing to see here.
         <span
+          data-test='filter-span'
           class='fake-link'
           v-on:click='toggleFilter'
         >View all {{ type }}s</span> to start marking your favorites.

@@ -5,7 +5,7 @@
     <nav>
       <ul>
         <li v-for='link in links' :key='link'>
-          <router-link exact :to='{ name: link }'>{{ link }}</router-link>
+          <router-link data-test='nav-link' exact :to='{ name: link }'>{{ link }}</router-link>
         </li>
       </ul>
     </nav>
