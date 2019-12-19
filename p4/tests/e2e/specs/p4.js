@@ -57,6 +57,8 @@ describe('test all the things!', () => {
   // Or does it lose its access to local storage between 'it' tests? 
   // (The test for viewing the message about no favorites does 
   // work correctly in the folowing test.)  
+  // I tried wrapping the last test in window.setTimeout but it made the test 
+  // disappear in Cypress
   it('unfavorites item and sees error message re no favorites to display', () => {
     // click to unfavorite
     cy.contains('[data-test="feedback-card-rave"]', person.rave).get('[data-test="favorite-button"]').click()
