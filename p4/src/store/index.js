@@ -14,9 +14,5 @@ export default new Vuex.Store({
         setFavoritesIndex(state, payload) {
             state.favoritesIndex = payload;
         }
-        // ,
-        // updateFavorites(state, payload) {
-        //     state.favorites += payload;
-        // }
     }
 })

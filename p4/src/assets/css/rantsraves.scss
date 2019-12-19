@@ -66,11 +66,6 @@ header {
     text-align: center;
     margin-top: 20px;
 }
-//
-// #logo {
-//     /* Actual width is 636; displaying at half-size for retina screens */
-//     width: 318px;
-// }
 
 .card {
   display: inline-block;
@@ -156,54 +151,3 @@ nav ul {
     }
 }
 
-
-/*----------------------------------------------------
-PAGE SPECIFIC
------------------------------------------------------*/
-// #products {
-//     .product {
-//         width: 75%;
-//         margin: auto;
-//         margin-bottom: 20px;
-//         border: 1px solid black;
-//         padding: 5px;
-//
-//         .product-name {
-//             font-weight: bold;
-//             font-size: 2.0rem;
-//             margin: 10px;
-//         }
-//
-//         .product-thumb {
-//             width: 200px;
-//             margin: 10px;
-//         }
-//
-//         .product-description {
-//             width: 75%;
-//             margin: auto;
-//             text-align: left;
-//             font-style: italic;
-//         }
-//
-//         .product-price {
-//             font-family: Georgia, 'Times New Roman', Times, serif;
-//             font-weight: bold;
-//             font-size: 2.0rem;
-//         }
-//     }
-// }
-
-// #featured {
-//     background-color: lighten($aqua, 10%);
-//     border-radius: $radius;
-//     padding: 10px;
-// }
-
-/*----------------------------------------------------
-MISC
------------------------------------------------------*/
-// .cleanList {
-//     list-style-type: none;
-//     padding: 0;
-// }

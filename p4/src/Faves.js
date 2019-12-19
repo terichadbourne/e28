@@ -81,7 +81,7 @@ export default class Faves {
 
   /**
    * Get an item from items via type and id
-   * Returns null if it doesn't exist
+   * Returns true if it exists and null if it doesn't 
    */
   getItem(type, id) {
     let key = this.getKey(type)
