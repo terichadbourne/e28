@@ -72,7 +72,11 @@ export default {
   },
   computed: {
     people: function() {
-      return this.$store.state.people;
+      if (this.$store.state.people) {
+        return Object.values(this.$store.state.people);
+      } else {
+        return null;
+      }
     },
     filteredPeople: function() {
       // return records for feedback of correct type
@@ -122,6 +126,10 @@ export default {
         );
       }
     }
+  },
+  mounted() {
+    console.log('in mounted in FeedbackList, setting people');
+    this.$store.dispatch('setPeople');
   }
 };
 </script>

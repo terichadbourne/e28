@@ -32,6 +32,7 @@ export default {
     }
   },
   mounted() {
+    console.log('in this.mounted in app.vue');
     this.faves = new app.Faves();
     this.$store.commit('setFavoritesIndex', this.faves.getItems());
     this.$store.dispatch('setPeople');

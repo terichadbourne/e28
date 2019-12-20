@@ -73,10 +73,18 @@ export default {
   name: 'CreatePerson',
   data: function() {
     return {
-      people: null,
       person: person,
       formHasErrors: false
     };
+  },
+  computed: {
+    people: function() {
+      if (this.$store.state.people) {
+        return Object.values(this.$store.state.people);
+      } else {
+        return null;
+      }
+    }
   },
   validations: {
     person: {
@@ -114,21 +122,18 @@ export default {
           .post(app.config.api + 'people.json', this.person)
           .then(response => {
             console.log(response);
-            // let key = response.data.name;
-            // this.$store.commit('addPerson', {
-            //   [key]: this.person
-            // });
+            let key = response.data.name;
+            this.$store.commit('addPerson', {
+              [key]: this.person
+            });
+            // directing to people page since there should be both
+            //  rant and rave options available there for the new person
             this.$router.push({
               name: 'people'
             });
           });
       }
     }
-  },
-  mounted() {
-    app.axios.get(app.config.api + 'people.json').then(response => {
-      this.people = response.data.slice(1);
-    });
   }
 };
 </script>

@@ -9,6 +9,10 @@ import PageNotFound from './components/pages/PageNotFound.vue';
 import Vuelidate from 'vuelidate'
 import store from './store'
 
+/* eslint-disable no-unused-vars */
+const _ = require('lodash');
+/* eslint-enable no-unused-vars */
+
 Vue.use(Vuelidate)
 
 Vue.use(VueRouter)

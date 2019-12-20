@@ -38,16 +38,22 @@ export default {
       );
     },
     person() {
-      return this.$store.getters.getPersonById(this.id);
+      if (this.$store.state.people) {
+        return this.$store.getters.getPersonById(this.id);
+      } else {
+        return null;
+      }
     }
+  },
+  mounted() {
+    console.log('in mounted in Feedback, setting people');
+    this.$store.dispatch('setPeople');
+    //   app.axios
+    //     .get(app.config.api + 'people/' + this.id + '.json')
+    //     .then(response => {
+    //       this.person = response.data;
+    //     });
   }
-  // mounted() {
-  //   app.axios
-  //     .get(app.config.api + 'people/' + this.id + '.json')
-  //     .then(response => {
-  //       this.person = response.data;
-  //     });
-  // }
 };
 </script>
 
