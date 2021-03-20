@@ -1,4 +1,4 @@
-# e28
+# Single-Page Applications & Interfaces with Vue.js (E-28)
 Coursework for <a href="https://hesweb.dev/e28">DGMD E-28</a>, Single-Page Applications & Interfaces with Vue.js, taken as a graduate-level course at Harvard Extension School in the fall of 2019. Multiple projects were built incrementally over the course of the class, adding in new Vue.js functionality as we went. 
 
 ### <a href="https://github.com/terichadbourne/e28/tree/master/p2">Potty Talk</a>
