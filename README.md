@@ -6,12 +6,21 @@ A mystery word guessing game to accompany the <a href="http://toilettranscripts.
 
 This project uses single file components in Vue.js.
 
-Located at: https://github.com/terichadbourne/e28/tree/master/p2
+View code at: https://github.com/terichadbourne/e28/tree/master/p2
+
+To run locally: 
+```js
+git clone https://github.com/terichadbourne/e28.git
+cd e28/p2
+npm install
+npm run serve
+```
+and view at http://localhost:8080/ 
 
 
 ### <a href="https://github.com/terichadbourne/e28/tree/master/p4">Rants & Raves</a>
 
-This is an MVP of an app that could be used to share feedback among company employees. In the current data structure, each employee has a single rant and a single rave maximum.
+This is an MVP of an app that could be used to share feedback among company employees. In the current data structure, each employee has a single rant and a single rave maximum. The app is currently read-only.
 
 There are currently 3 defined "pages":
 
@@ -23,6 +32,15 @@ Clicking on a specific rant or rave takes you a page with more detail, including
 
 While on Rants or Raves pages or looking at a specific piece of feedback, the user can mark it as a favorite. (In a real-world application, this could be used to judge where employees are in alignment on their opinions.)
 
-This project uses Vue.js, VueX, Firebase, Cypress and Mocha. 
+This project uses Vue.js, VueX, Firebase, Vuelidate, Cypress and Mocha. 
 
-Located at: https://github.com/terichadbourne/e28/tree/master/p4
+View code at: https://github.com/terichadbourne/e28/tree/master/p4
+
+To run locally: 
+```js
+git clone https://github.com/terichadbourne/e28.git
+cd e28/p4
+npm install
+npm run serve
+```
+and view at http://p4.loc:8080/ 
