@@ -1,14 +1,17 @@
 # Single-Page Applications & Interfaces with Vue.js (E-28)
 Coursework for <a href="https://hesweb.dev/e28">DGMD E-28</a>, Single-Page Applications & Interfaces with Vue.js, taken as a graduate-level course at Harvard Extension School in the fall of 2019. Multiple projects were built incrementally over the course of the class, adding in new Vue.js functionality as we went. 
 
-### <a href="https://github.com/terichadbourne/e28/tree/master/p2">Potty Talk</a>
+### Potty Talk
+
 A mystery word guessing game to accompany the <a href="http://toilettranscripts.com/">Toilet Transcripts</a>. 
+
+![image](https://user-images.githubusercontent.com/19171465/111885993-7b853700-89a1-11eb-8f64-aae294613790.png)
 
 This project uses single file components in Vue.js.
 
-View code at: https://github.com/terichadbourne/e28/tree/master/p2
+**View code**: https://github.com/terichadbourne/e28/tree/master/p2
 
-To run locally: 
+**Run locally**: 
 ```js
 git clone https://github.com/terichadbourne/e28.git
 cd e28/p2
@@ -18,9 +21,13 @@ npm run serve
 and view at http://localhost:8080/ 
 
 
-### <a href="https://github.com/terichadbourne/e28/tree/master/p4">Rants & Raves</a>
+### Rants & Raves
 
-This is an MVP of an app that could be used to share feedback among company employees. In the current data structure, each employee has a single rant and a single rave maximum. The app is currently read-only.
+
+This is an MVP of an app that could be used to share feedback among company employees. In the current data structure, each employee has a single rant and a single rave maximum. 
+
+<img src="https://user-images.githubusercontent.com/19171465/111885716-e3d31900-899f-11eb-9e87-9c56b734b433.png" height="250">
+<img src="https://user-images.githubusercontent.com/19171465/111885806-7a073f00-89a0-11eb-9a2e-a4953b44be47.png" height="250">
 
 There are currently 3 defined "pages":
 
@@ -28,15 +35,15 @@ There are currently 3 defined "pages":
 - Rants (view all rants anonymously or filter down to view just favorites)
 - Raves (view all raves anonymously or filter down to view just favorites)
 
-Clicking on a specific rant or rave takes you a page with more detail, including the person the feedback is from.
+Clicking on a specific rant or rave takes you a page with more detail, including the person the feedback is from. 
 
-While on Rants or Raves pages or looking at a specific piece of feedback, the user can mark it as a favorite. (In a real-world application, this could be used to judge where employees are in alignment on their opinions.)
+While on Rants or Raves pages or looking at a specific piece of feedback, the user can mark it as a favorite. (In a real-world application, this could be used to judge where employees are in alignment on their opinions.) The app is currently read-only except for the favoriting feature. 
 
 This project uses Vue.js, VueX, Firebase, Vuelidate, Cypress and Mocha. 
 
-View code at: https://github.com/terichadbourne/e28/tree/master/p4
+**View code**: https://github.com/terichadbourne/e28/tree/master/p4
 
-To run locally: 
+**Run locally**: 
 ```js
 git clone https://github.com/terichadbourne/e28.git
 cd e28/p4
