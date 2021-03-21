@@ -9,7 +9,7 @@ A mystery word guessing game to accompany the <a href="http://toilettranscripts.
 
 This project uses single file components in Vue.js.
 
-**View live app**: https://potty-talk.teri.codes/
+**View live app**: https://potty-talk.teri.dev/
 
 **View code**: https://github.com/terichadbourne/e28/tree/master/p2
 
@@ -45,7 +45,7 @@ While on Rants or Raves pages or looking at a specific piece of feedback, the us
 
 This project uses Vue.js, VueX, Firebase, Vuelidate, Cypress and Mocha. 
 
-**View live app**: https://rants-raves.teri.codes/
+**View live app**: https://rants-raves.teri.dev/
 
 **View code**: https://github.com/terichadbourne/e28/tree/master/p4
 
