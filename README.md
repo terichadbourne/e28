@@ -9,6 +9,8 @@ A mystery word guessing game to accompany the <a href="http://toilettranscripts.
 
 This project uses single file components in Vue.js.
 
+**View live app**: https://potty-talk.teri.codes/
+
 **View code**: https://github.com/terichadbourne/e28/tree/master/p2
 
 **Run locally**: 
@@ -26,8 +28,10 @@ and view at http://localhost:8080/
 
 This is an MVP of an app that could be used to share feedback among company employees. In the current data structure, each employee has a single rant and a single rave maximum. 
 
-<img src="https://user-images.githubusercontent.com/19171465/111885716-e3d31900-899f-11eb-9e87-9c56b734b433.png" height="250">
-<img src="https://user-images.githubusercontent.com/19171465/111885806-7a073f00-89a0-11eb-9a2e-a4953b44be47.png" height="250">
+<div>
+  <img src="https://user-images.githubusercontent.com/19171465/111885716-e3d31900-899f-11eb-9e87-9c56b734b433.png" height="250">
+  <img src="https://user-images.githubusercontent.com/19171465/111885806-7a073f00-89a0-11eb-9a2e-a4953b44be47.png" height="250">  
+</div>
 
 There are currently 3 defined "pages":
 
@@ -40,6 +44,8 @@ Clicking on a specific rant or rave takes you a page with more detail, including
 While on Rants or Raves pages or looking at a specific piece of feedback, the user can mark it as a favorite. (In a real-world application, this could be used to judge where employees are in alignment on their opinions.) The app is currently read-only except for the favoriting feature. 
 
 This project uses Vue.js, VueX, Firebase, Vuelidate, Cypress and Mocha. 
+
+**View live app**: https://rants-raves.teri.codes/
 
 **View code**: https://github.com/terichadbourne/e28/tree/master/p4
 
