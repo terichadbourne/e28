@@ -3,7 +3,7 @@ Coursework for <a href="https://hesweb.dev/e28">DGMD E-28</a>, Single-Page Appli
 
 ### Potty Talk
 
-A mystery word guessing game to accompany the <a href="http://toilettranscripts.com/">Toilet Transcripts</a>. 
+A mystery word guessing game to accompany the <a href="https://toilet-transcripts.teri.dev/">Toilet Transcripts</a>. 
 
 ![image](https://user-images.githubusercontent.com/19171465/111885993-7b853700-89a1-11eb-8f64-aae294613790.png)
 
