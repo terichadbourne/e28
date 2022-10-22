@@ -1,6 +1,6 @@
 # Project 2
 + By: Teri Chadbourne
-+ Production URL: <http://p2.teri-e28.me/>
++ Production URL: <https://potty-talk.teri.dev/>
 
 ## Build strategy
 + [ ] Integrated
