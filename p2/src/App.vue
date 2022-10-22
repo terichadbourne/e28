@@ -4,7 +4,7 @@
     <p>
       A mystery word game to accompany the
       <a
-        href="http://toilettranscripts.com"
+        href="https://toilet-transcripts.teri.dev/"
         target="_blank"
       >Toilet Transcripts</a>
     </p>
@@ -31,7 +31,7 @@
       <p v-if="liveGame && strikeDanger">
         Uh oh! You're almost out of guesses. Go check out the
         <a
-          href="http://toilettranscripts.com/glossary.html"
+          href="https://toilet-transcripts.teri.dev/glossary.html"
           target="_blank"
         >Toilet Transcripts glossary</a> if you're feeling particularly stumped.
       </p>
